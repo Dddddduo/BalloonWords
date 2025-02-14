@@ -60,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `t_sentences`
     `create_time` datetime                                                  NOT NULL COMMENT '创建时间',
     `from`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '提供者',
     `hot`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '热度',
-    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展1',
-    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展2',
-    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展3',
+    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展1',
+    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展2',
+    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展3',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
@@ -81,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `t_tags`
     `name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '标签名称',
     `from`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '提供者',
     `hot`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '热度',
-    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展1',
-    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展2',
-    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展3',
+    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展1',
+    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展2',
+    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  COMMENT '拓展3',
     `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE KEY `uk_name` (`name`) USING BTREE COMMENT '标签名称唯一索引'

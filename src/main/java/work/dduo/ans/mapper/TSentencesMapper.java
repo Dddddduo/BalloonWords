@@ -1,5 +1,6 @@
 package work.dduo.ans.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -10,7 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity work.dduo.ans.domain.TSentences
 */
 public interface TSentencesMapper extends BaseMapper<TSentences> {
-
+    TSentences get();
 }
 
 
