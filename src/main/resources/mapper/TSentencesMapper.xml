@@ -20,4 +20,8 @@
         from,hot,other1,
         other2,other3
     </sql>
+    <select id="get" resultType="work.dduo.ans.domain.TSentences">
+        SELECT * FROM t_sentences LIMIT 1;
+    </select>
+
 </mapper>
