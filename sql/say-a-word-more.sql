@@ -58,6 +58,11 @@ CREATE TABLE IF NOT EXISTS `t_sentences`
     `id`          int                                                       NOT NULL AUTO_INCREMENT COMMENT '句子id',
     `content`     longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '句子内容',
     `create_time` datetime                                                  NOT NULL COMMENT '创建时间',
+    `from`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '提供者',
+    `hot`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '热度',
+    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展1',
+    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展2',
+    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展3',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
@@ -67,13 +72,18 @@ CREATE TABLE IF NOT EXISTS `t_sentences`
 
 
 -- ----------------------------
--- 句子表和标签表的中间表
+-- 标签表
 -- ----------------------------
 DROP TABLE IF EXISTS `t_tags`;
 CREATE TABLE IF NOT EXISTS `t_tags`
 (
     `id`          int                                                           NOT NULL AUTO_INCREMENT COMMENT '标签id',
     `name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '标签名称',
+    `from`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '提供者',
+    `hot`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '热度',
+    `other1`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展1',
+    `other2`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展2',
+    `other3`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '拓展3',
     `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE KEY `uk_name` (`name`) USING BTREE COMMENT '标签名称唯一索引'
@@ -84,15 +94,16 @@ CREATE TABLE IF NOT EXISTS `t_tags`
   ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- 标签表
+--  句子表和标签表的中间表
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sentence_tag`;
 CREATE TABLE IF NOT EXISTS `t_sentence_tag`
 (
+    `id` int      NOT NULL COMMENT 'id',
     `sentence_id` int      NOT NULL COMMENT '句子id',
     `tag_id`      int      NOT NULL COMMENT '标签id',
     `create_time` datetime NOT NULL COMMENT '创建时间',
-    PRIMARY KEY (`sentence_id`, `tag_id`) USING BTREE,
+    PRIMARY KEY (`id`) USING BTREE,
     FOREIGN KEY (`sentence_id`) REFERENCES `t_sentences` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`tag_id`) REFERENCES `t_tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
