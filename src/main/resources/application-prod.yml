@@ -1,0 +1,63 @@
+# 线上配置文件
+server:
+  port: 8100
+
+# Spring的配置
+spring:
+  # 配置MySQL
+  datasource:
+    url: jdbc:mysql://113.44.34.176:3306/dduo_yiyan_db?useSSL=false&serverTimezone=UTC
+    username: dduo_yiyan_db
+    password: aaZk2fCGBsSS8Y33
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      # 初始连接数
+      initial-size: 10
+      # 最小连接池数量
+      min-idle: 10
+      # 最大连接池数量
+      max-active: 150
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 600000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000
+      # 配置检测连接是否有效
+      validation-query: SELECT 1 FROM DUAL
+      # 配置检测连接是否有效时间
+      validation-query-timeout: 500
+      # 在获取连接后，确定是否要进行连接空间时间的检查
+      test-while-idle: true
+      # 设置从连接池获取连接时是否检查连接有效性，true检查，false不检查
+      test-on-borrow: false
+      # 设置从连接池归还连接时是否检查连接有效性，true检查，false不检查
+      test-on-return: false
+  # 配置Redis
+  data:
+    redis:
+      host: 113.44.34.176
+      timeout: 2000
+      database: 0
+      password: yourPassword
+      port: 6379
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 150
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: 5000ms
+          # 连接池中的最大空闲连接
+          max-idle: 100
+          # 连接池中的最小空闲连接
+          min-idle: 50
+
+# 配置线程池
+thread:
+  pool:
+    core-pool-size: 5
+    max-pool-size: 10
+    queue-capacity: 50
+    keep-alive-seconds: 60
