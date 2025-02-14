@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="work.dduo.ans.mapper.TSentencesMapper">
+
+    <resultMap id="BaseResultMap" type="work.dduo.ans.domain.TSentences">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="from" column="from" jdbcType="VARCHAR"/>
+            <result property="hot" column="hot" jdbcType="VARCHAR"/>
+            <result property="other1" column="other1" jdbcType="VARCHAR"/>
+            <result property="other2" column="other2" jdbcType="VARCHAR"/>
+            <result property="other3" column="other3" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,content,create_time,
+        from,hot,other1,
+        other2,other3
+    </sql>
+</mapper>
