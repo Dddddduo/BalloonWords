@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import work.dduo.ans.domain.TSentences;
 import work.dduo.ans.mapper.TSentencesMapper;
 import work.dduo.ans.model.Result;
+import work.dduo.ans.model.vo.response.GetRespVO;
+import work.dduo.ans.service.TSentencesService;
 
 @RestController
 public class WordsController {
 
     @Autowired
-    private TSentencesMapper tSentencesMapper;
+    private TSentencesService tSentencesService;
 
     /**
      * 随机获取一条句子
@@ -23,9 +25,13 @@ public class WordsController {
     @ApiOperation(value = "随机获取一条句子")
     @PostMapping("/get")
     public Result<?> getWord() {
-        TSentences tSentences = tSentencesMapper.get();
-        System.out.println(tSentences);
-        return null;
+        GetRespVO getRespVO = tSentencesService.get();
+        System.out.println(getRespVO);
+        if(getRespVO!=null){
+            return Result.success(getRespVO);
+        }else {
+            return Result.fail("Error");
+        }
     }
 
 }

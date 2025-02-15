@@ -2,6 +2,7 @@ package work.dduo.ans.service;
 
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
+import work.dduo.ans.model.vo.response.GetRespVO;
 
 /**
 * @author ZDY
@@ -9,5 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-02-14 23:27:19
 */
 public interface TSentencesService extends IService<TSentences> {
-
+    GetRespVO get();
 }
