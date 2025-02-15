@@ -79,10 +79,11 @@ curl https://api.ballonwords.com/get
 3. 弱化复杂架构强调直观的气球交互逻辑
 
 ## 🧑💻 核心开发者
-<img src="https://ooo.0x0.ooo/2025/02/15/OG0Mbq.jpg" width="200" />
+**点击图片跳转**
 
-**GitHub**: [Dddddduo](https://github.com/Dddddduo)   
-**邮箱**: [gmail](judithdixon0091@gmail.com)   
+<a href="https://github.com/Dddddduo">
+  <img src="https://ooo.0x0.ooo/2025/02/15/OG0Mbq.jpg" width="200" />
+</a>
 
 ## 🤝 贡献者
 感谢这些优秀的贡献者（按贡献时间排序）
