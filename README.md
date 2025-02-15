@@ -104,3 +104,8 @@ curl https://api.ballonwords.com/get
 - 重大变更需更新CHANGELOG.md 文件
 
 🕊️ 让每个灵感都能自由飞翔 —— BallonWords 开发组 🎈
+
+## ✨ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Dddddduo/BalloonWords&type=Date)](https://star-history.com/#Dddddduo/BalloonWords&Date)
+
