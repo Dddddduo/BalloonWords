@@ -82,9 +82,7 @@ curl https://api.ballonwords.com/get
 <img src="https://ooo.0x0.ooo/2025/02/15/OG0Mbq.jpg" width="200" />
 
 **GitHub**: [Dddddduo](https://github.com/Dddddduo)   
-**邮箱**: [zhangsan@example.com](mailto:zhangsan@example.com)   
- 
- 
+**邮箱**: [gmail](judithdixon0091@gmail.com)   
 
 ## 🤝 贡献者
 感谢这些优秀的贡献者（按贡献时间排序）
