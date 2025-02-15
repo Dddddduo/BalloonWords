@@ -20,8 +20,38 @@
         from,hot,other1,
         other2,other3
     </sql>
-    <select id="get" resultType="work.dduo.ans.domain.TSentences">
-        SELECT * FROM t_sentences LIMIT 1;
+    <update id="setTS_hot">
+        UPDATE t_sentences
+        SET hot = hot + 1
+        WHERE id = #{i}
+    </update>
+
+    <update id="setTT_hot">
+        UPDATE t_tags
+        SET hot = hot + 1
+        WHERE id = #{i}
+    </update>
+
+    <select id="get" resultType="work.dduo.ans.model.vo.response.GetResp">
+        SELECT
+            TS.id,
+            TS.content,
+            TS.`from`,
+            TS.hot,
+            TT.id AS tagId,
+            TT.from,
+            GROUP_CONCAT(TT.name  SEPARATOR ',') AS tags  -- 使用GROUP_CONCAT合并tags
+        FROM
+            t_sentences AS TS
+                JOIN
+            t_sentence_tag AS TST ON TS.id  = TST.sentence_id
+                JOIN
+            t_tags AS TT ON TST.tag_id  = TT.id
+        GROUP BY
+            TS.id,  TS.content,  TS.`from`, TS.hot
+        ORDER BY
+            RAND()  -- 随机排序
+            LIMIT 1;  -- 只取一条数据
     </select>
 
 </mapper>

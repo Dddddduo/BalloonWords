@@ -1,8 +1,8 @@
 package work.dduo.ans.mapper;
 
-import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import work.dduo.ans.model.vo.response.GetResp;
 
 /**
 * @author ZDY
@@ -11,7 +11,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity work.dduo.ans.domain.TSentences
 */
 public interface TSentencesMapper extends BaseMapper<TSentences> {
-    TSentences get();
+    // 随机获取一条句子 朴实无华的多表联查
+    GetResp get();
+
+    // sentence表的hot字段值加一
+    void setTS_hot(Long i);
+
+    // tag表的hot字段值加一
+    void setTT_hot(Long i);
 }
 
 
