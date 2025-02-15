@@ -56,16 +56,19 @@ graph TD
    - 过时语句执行SoftReference柔性回收
 
 ## 🚀 快速开始  
+![image](https://github.com/user-attachments/assets/6445c01b-d2e7-4cd6-9dd8-97fa657aaf38)
+
 ```bash
 # 获取随机语句
 curl https://api.ballonwords.com/get
 
 # 示例响应
 {
-  "content": "理想如晨星，我们永不能触到",
-  "color": "#FFB3CC",
-  "animation": "slow_float",
-  "category": "philosophy"
+   "content": "你好像在等十九世纪的青洄，可我是北纬六十七度以北的雪",
+    "tagName": [
+      "青春",
+      "故事"
+    ]
 }
 ```
 
