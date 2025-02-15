@@ -72,9 +72,36 @@ curl https://api.ballonwords.com/get
 - 支持JSON/YAML格式批量导入  
 - 智能去重校验（MD5+语义双校验）  
 - 词库热更新（无需重启服务）
-```
 
 调整重点：  
 1. 所有技术描述围绕"Ballon"隐喻展开  
 2. 突出Java集合框架在词库管理的核心作用  
-3. 弱化复杂架构强调直观的气球交互逻辑  
+3. 弱化复杂架构强调直观的气球交互逻辑
+
+## 🧑💻 核心开发者
+<img src="https://ooo.0x0.ooo/2025/02/15/OG0Mbq.jpg" width="200" />
+
+**GitHub**: [Dddddduo](https://github.com/Dddddduo)   
+**邮箱**: [zhangsan@example.com](mailto:zhangsan@example.com)   
+ 
+ 
+
+## 🤝 贡献者
+感谢这些优秀的贡献者（按贡献时间排序）
+
+
+## 📜 协作规范 
+
+1. **代码提交**：请遵循[Angular提交规范](https://github.com/angular/angular/blob/main/CONTRIBUTING.md) 
+2. **分支管理**：
+    ```bash 
+   git checkout -b feat/your-feature  # 新功能开发 
+   git checkout -b fix/issue-number   # Bug修复
+
+**注意**
+- 新增功能请创建feature/功能名称分支
+- 问题修复使用bugfix/问题描述分支
+- 提交代码需通过ESLint检查 [1]
+- 重大变更需更新CHANGELOG.md 文件
+
+🕊️ 让每个灵感都能自由飞翔 —— BallonWords 开发组 🎈
