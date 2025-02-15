@@ -3,10 +3,24 @@
 
 
 #### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+BallonWords is a lightweight Chinese sentence inspiration platform, dedicated to endowing words with vitality through technology. We use dynamic balloon special effects to carry every touching sentence, allowing fragmented inspirations such as classic lines, internet catchphrases, and literary excerpts to float into the digital world in a fun way, thus building an ever - growing open - ended sentence library.
+
+This is a balloon art exhibition woven with JVM. The HashSet serves as the balloon - tying rope, and the LinkedList forms the floating trajectory. Through the dynamic object pool technology, each sentence becomes a suspendable BalloonEntity, gracefully swaying in the airflow of the Spring application context.
+
+We aim to make every byte bloom into a balloon filled with philosophical thoughts, hovering lightly in the quantum gap between reality and imagination.
 
 #### Software Architecture
-Software architecture description
+
+```mermaid
+graph TD
+    A[Java 17] --> B[Spring Boot] 
+    B --> C[词库引擎]
+    C --> D[Redis缓存池]
+    C --> E[MySQL词库]
+    B --> F[RESTful API]
+    F --> G[随机获取 /get]
+    F --> H[分类获取 /category]
+```
 
 #### Installation
 
@@ -16,7 +30,7 @@ Software architecture description
 
 #### Instructions
 
-1.  xxxx
+1.  
 2.  xxxx
 3.  xxxx
 
