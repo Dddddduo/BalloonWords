@@ -30,9 +30,16 @@ graph TD
 
 #### Instructions
 
-1.  
-2.  xxxx
-3.  xxxx
+1.  Vocabulary balloon cycle rotation  
+-Balloon inflation effect (gradual fade)  
+-Classic Statement: Floating effect, stays on the screen  
+-Old statement: Regularly automatically drift out of the field of vision  
+
+2. Real-time synchronization balloon effect  
+-Using HashMap to tag and group balloons (e.g., Inspirational Red, Philosophical Blue, Poetry Green)  
+-Utilize PriorityQueue to display the priority of recent popular statements  
+-Outdated statements execute SoftReference flexible garbage collection  
+
 
 #### Contribution
 
