@@ -3,9 +3,9 @@
 
 
 #### Description
-BallonWords is a lightweight Chinese sentence inspiration platform, dedicated to endowing words with vitality through technology. We use dynamic balloon special effects to carry every touching sentence, allowing fragmented inspirations such as classic lines, internet catchphrases, 和 literary excerpts to float into the digital world in a fun way, thus building an ever - growing open - ended sentence library.
+BallonWords is a lightweight Chinese sentence inspiration platform, dedicated to endowing words with vitality through technology. We use dynamic balloon special effects to carry every touching sentence, allowing fragmented inspirations such as classic lines, internet catchphrases, and literary excerpts to float into the digital world in a fun way, thus building an ever - growing open - ended sentence library.
 
-This is a balloon art exhibition woven with JVM. The HashSet serves as the balloon - tying rope, 和 the LinkedList forms the floating trajectory. Through the dynamic object pool technology, each sentence becomes a suspendable BalloonEntity, gracefully swaying in the airflow of the Spring application context.
+This is a balloon art exhibition woven with JVM. The HashSet serves as the balloon - tying rope, and the LinkedList forms the floating trajectory. Through the dynamic object pool technology, each sentence becomes a suspendable BalloonEntity, gracefully swaying in the airflow of the Spring application context.
 
 We aim to make every byte bloom into a balloon filled with philosophical thoughts, hovering lightly in the quantum gap between reality and imagination.
 
