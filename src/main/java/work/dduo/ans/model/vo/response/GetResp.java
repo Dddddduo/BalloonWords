@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class GetResp {
-    // 句子部分
     private Long id;
     private String content;
     private String from;
@@ -14,6 +13,5 @@ public class GetResp {
     private Long tagId;
     private String tagFrom;
     private String tags;
-
 }
 

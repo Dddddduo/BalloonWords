@@ -2,7 +2,11 @@ package work.dduo.ans.mapper;
 
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import work.dduo.ans.model.vo.response.GetAllResp;
+import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetResp;
+
+import java.util.List;
 
 /**
 * @author ZDY
@@ -19,6 +23,11 @@ public interface TSentencesMapper extends BaseMapper<TSentences> {
 
     // tag表的hot字段值加一
     void setTT_hot(Long i);
+
+    // 获取所有句子
+    List<GetAllResp> getAll();
+
+    List<GetAllTagsResp> getAllTags();
 }
 
 
