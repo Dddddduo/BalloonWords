@@ -20,6 +20,8 @@
         from,hot,other1,
         other2,other3
     </sql>
+
+
     <update id="setTS_hot">
         UPDATE t_sentences
         SET hot = hot + 1
@@ -32,6 +34,7 @@
         WHERE id = #{i}
     </update>
 
+<!--    todo 改掉join关键字的查询方法-->
     <select id="get" resultType="work.dduo.ans.model.vo.response.GetResp">
         SELECT
             TS.id,
@@ -39,18 +42,18 @@
             TS.`from`,
             TS.hot,
             TT.id AS tagId,
-            TT.from,
-            GROUP_CONCAT(TT.name  SEPARATOR ',') AS tags  -- 使用GROUP_CONCAT合并tags
+            TT.`from` AS tagFrom,
+            GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
         FROM
-            t_sentences AS TS
-                JOIN
-            t_sentence_tag AS TST ON TS.id  = TST.sentence_id
-                JOIN
-            t_tags AS TT ON TST.tag_id  = TT.id
+            t_sentences TS
+                LEFT JOIN
+            t_sentence_tag TST ON TS.id = TST.sentence_id
+                LEFT JOIN
+            t_tags TT ON TST.tag_id = TT.id
         GROUP BY
-            TS.id,  TS.content,  TS.`from`, TS.hot
+            TS.id, TS.content, TS.`from`, TS.hot
         ORDER BY
-            RAND()  -- 随机排序
+            RAND()    -- 随机排序
             LIMIT 1;  -- 只取一条数据
     </select>
 
