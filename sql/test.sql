@@ -35,3 +35,28 @@ LIMIT 1;  -- 只取一条数据
 
 #  查询所有句子
 SELECT * FROM t_sentences;
+
+#  查询所有标签
+SELECT * FROM t_tags;
+
+#  根据标签查询句子
+SELECT
+    TS.id,
+    TS.content,
+    TS.create_time,
+    TS.from,
+    TS.hot,
+    TS.other1,
+    TS.other2,
+    TS.other3,
+    GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
+FROM
+    t_sentences TS
+        LEFT JOIN
+    t_sentence_tag TST ON TS.id = TST.sentence_id
+        LEFT JOIN
+    t_tags TT ON TST.tag_id = TT.id
+WHERE
+    TT.name IN ('青春')
+GROUP BY
+    TS.id, TS.content, TS.create_time, TS.from, TS.hot, TS.other1, TS.other2, TS.other3;

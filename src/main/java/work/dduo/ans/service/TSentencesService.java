@@ -1,7 +1,9 @@
 package work.dduo.ans.service;
 
+import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
+import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
@@ -20,4 +22,8 @@ public interface TSentencesService extends IService<TSentences> {
     List<GetAllResp> getAll();
 
     List<GetAllTagsResp> getAllTags();
+
+    List<GetAllResp> getAllByTags( @Param("tagsList") List<TagsReq> tagsList);
+
+    GetRespVO getByTags( @Param("tagsList")  List<TagsReq> tagsList);
 }

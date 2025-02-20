@@ -1,14 +1,20 @@
 package work.dduo.ans.controller;
 
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import work.dduo.ans.model.Result;
+import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
 
-@RestController
+import java.util.List;
+
+@RestController("/sentence")
 public class WordsController {
 
     @Autowired
@@ -43,11 +49,10 @@ public class WordsController {
     @PostMapping("/get")
     public Result<?> getWord() {
         GetRespVO getRespVO = tSentencesService.get();
-        System.out.println(getRespVO);
         if(getRespVO!=null){
             return Result.success(getRespVO);
         }else {
-            return Result.fail("Error");
+            return Result.fail("null");
         }
     }
 
@@ -57,22 +62,21 @@ public class WordsController {
      */
     @ApiOperation(value = "根据标签获取句子")
     @PostMapping("/get-all-by-tags")
-    public Result<?> getAllByTags() {
-        // TODO
-
-        return Result.success();
+    public Result<?> getAllByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
+        List<GetAllResp> allByTags = tSentencesService.getAllByTags(tagsList);
+        return Result.success(allByTags);
     }
 
     /**
      * 根据标签随机获取一条句子
      * @return
      */
-    @ApiOperation(value = "根据标签获取句子")
+    @ApiOperation(value = "根据标签随机获取一条句子")
     @PostMapping("/get-by-tags")
-    public Result<?> getByTags() {
+    public Result<?> getByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
         // TODO
-
-        return Result.success();
+        GetRespVO getRespVO  = tSentencesService.getByTags(tagsList);
+        return Result.success(getRespVO);
     }
 
 }
