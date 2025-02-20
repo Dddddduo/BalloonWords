@@ -4,11 +4,15 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import work.dduo.ans.domain.TSentences;
+import work.dduo.ans.model.vo.response.GetAllResp;
+import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.mapper.TSentencesMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author ZDY
@@ -35,5 +39,17 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         getRespVO.setContent(content);
         getRespVO.setTagName( StrUtil.split(tagName, ','));
         return getRespVO;
+    }
+
+    @Override
+    public List<GetAllResp>  getAll() {
+        List<GetAllResp> sentencesList = tSentencesMapper.getAll();
+        return sentencesList;
+    }
+
+    @Override
+    public List<GetAllTagsResp> getAllTags() {
+        List<GetAllTagsResp> tagsList = tSentencesMapper.getAllTags();
+        return tagsList;
     }
 }

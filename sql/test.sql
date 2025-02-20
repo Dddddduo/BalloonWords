@@ -32,3 +32,6 @@ GROUP BY
 ORDER BY
     RAND()  -- 随机排序
 LIMIT 1;  -- 只取一条数据
+
+#  查询所有句子
+SELECT * FROM t_sentences;

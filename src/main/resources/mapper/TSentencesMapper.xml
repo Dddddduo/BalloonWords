@@ -57,4 +57,13 @@
             LIMIT 1;  -- 只取一条数据
     </select>
 
+
+    <select id="getAll"  resultType="work.dduo.ans.model.vo.response.GetAllResp" >
+        SELECT * FROM t_sentences;
+    </select>
+    <select id="getAllTags" resultType="work.dduo.ans.model.vo.response.GetAllTagsResp">
+        SELECT * FROM t_tags;
+    </select>
+
+
 </mapper>
