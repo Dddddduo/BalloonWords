@@ -20,7 +20,7 @@ public class WordsController {
 
     /**
      * 随机获取一条句子
-     * @return
+     * @return Result
      */
     @ApiOperation(value = "随机获取一条句子")
     @PostMapping("/get")
@@ -33,5 +33,11 @@ public class WordsController {
             return Result.fail("Error");
         }
     }
+
+    /**
+     * 根据标签获取句子
+     * @return
+     */
+
 
 }
