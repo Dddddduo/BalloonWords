@@ -27,6 +27,24 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
    - 暖色系（励志红、温馨橙）  
    - 冷色系（哲理蓝、诗词青）
 
+## ✅ 已实现功能和后期展望
+  - [x] 词库管理数据库表的设计
+  - [x] 初始化get接口的实现
+  - [x] 根据标签去查询语句
+  - [ ] 引入redis缓存降低数据库查询的压力
+  - [ ] 引入消息队列解耦
+  - [ ] 前端接口文档的开发
+
+## 🌱 开发日志
+
+**2.10 - 2.12**
+- 设计数据库表
+- 多表联查实现第一个接口 /get
+
+**2.20 - 3.1**
+- 引入消息队列
+- 多表联查实现第二个接口 /getByTag
+
 ## 🛠️ 技术架构  
 
 ```mermaid
@@ -99,9 +117,10 @@ curl https://api.ballonwords.com/get
   <img src="https://avatars.githubusercontent.com/u/176784073?v=4" width="100" />
 </a>
 
-## 📜 协作规范  
-1. **代码提交**：请遵循[Angular提交规范](https://github.com/angular/angular/blob/main/CONTRIBUTING.md)  
-2. **分支管理**：
+## 📜 协作规范
+1. **代码仓库地址**：https://github.com/Dddddduo/balloonWords
+2. **代码提交**：请遵循[Angular提交规范](https://github.com/angular/angular/blob/main/CONTRIBUTING.md)  
+3. **分支管理**：
     ```bash 
    git checkout -b feat/your-feature  # 新功能开发 
    git checkout -b fix/issue-number   # Bug修复
