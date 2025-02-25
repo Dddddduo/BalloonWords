@@ -8,6 +8,7 @@ class AnsApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("springboot start success");
     }
 
 }
