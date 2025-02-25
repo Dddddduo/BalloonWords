@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import work.dduo.ans.model.Result;
 import work.dduo.ans.model.vo.request.TagsReq;
@@ -14,7 +15,8 @@ import work.dduo.ans.service.TSentencesService;
 
 import java.util.List;
 
-@RestController("/sentence")
+@RestController
+@RequestMapping("/sentence")
 public class WordsController {
 
     @Autowired
@@ -74,7 +76,6 @@ public class WordsController {
     @ApiOperation(value = "根据标签随机获取一条句子")
     @PostMapping("/get-by-tags")
     public Result<?> getByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
-        // TODO
         GetRespVO getRespVO  = tSentencesService.getByTags(tagsList);
         return Result.success(getRespVO);
     }
