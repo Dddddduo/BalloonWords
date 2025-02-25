@@ -10,8 +10,7 @@ public class GetResp {
     private String content;
     private String from;
     private Boolean hot;
-    private Long tagId;
-    private String tagFrom;
+    private String tagId;
     private String tags;
 }
 
