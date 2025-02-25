@@ -16,7 +16,9 @@ import work.dduo.ans.mapper.TSentencesMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author ZDY
@@ -34,16 +36,24 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         // 拿到数据库中数据
         GetResp getResp = tSentencesMapper.get();
         String content = getResp.getContent();
-        String tagName = getResp.getTags();
+        String tags = getResp.getTags();
+        String tagId = getResp.getTagId();
         // 句子的hot字段和标签的hot字段++
         tSentencesMapper.setTS_hot(getResp.getId());
-        List<Long> tagsList = new ArrayList<>();
-        tagsList.add(getResp.getTagId());
-        tSentencesMapper.setTT_hot(tagsList);
+        List<Long> tagList = Arrays.stream(tagId.split(","))
+                .map(tag -> {
+                    try {
+                        return Long.valueOf(tag);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }).collect(Collectors.toList());
+        tSentencesMapper.setTT_hot(tagList);
         // 脱敏后返回
         GetRespVO getRespVO =new GetRespVO();
         getRespVO.setContent(content);
-        getRespVO.setTagName( StrUtil.split(tagName, ','));
+        getRespVO.setTagName( StrUtil.split(tags, ','));
         return getRespVO;
     }
 
@@ -70,12 +80,23 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         GetResp getResp = tSentencesMapper.getByTags(tagsList);
         // 拿到数据库中数据
         String content = getResp.getContent();
-        String tagName = getResp.getTags();
+        String tags = getResp.getTags();
+        String tagId = getResp.getTagId();
         tSentencesMapper.setTS_hot(getResp.getId());
+        List<Long> tagList = Arrays.stream(tagId.split(","))
+                .map(tag -> {
+                    try {
+                        return Long.valueOf(tag);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }).collect(Collectors.toList());
+        tSentencesMapper.setTT_hot(tagList);
         // 脱敏后返回
         GetRespVO getRespVO =new GetRespVO();
         getRespVO.setContent(content);
-        getRespVO.setTagName( StrUtil.split(tagName, ','));
+        getRespVO.setTagName( StrUtil.split(tags.toString(), ','));
         return getRespVO;
     }
 }

@@ -35,12 +35,14 @@
 <!--    </update>-->
 
     <update id="setTT_hot">
-        <foreach collection="tagsList" item="tag_id" open="" separator=";" close="">
-            UPDATE t_tags
-            SET hot = hot + 1
-            WHERE id = #{tag_id}
+        UPDATE t_tags
+        SET hot = hot + 1
+        WHERE id IN
+        <foreach collection="tagsList" item="tag_id" open="(" separator="," close=")">
+            #{tag_id}
         </foreach>
     </update>
+
 
 <!--    todo 改掉join关键字的查询方法-->
     <select id="get" resultType="work.dduo.ans.model.vo.response.GetResp">
@@ -48,8 +50,7 @@
                TS.content,
                TS.`from`,
                TS.hot,
-               TT.id                               AS tagId,
-               TT.`from`                           AS tagFrom,
+               GROUP_CONCAT(TT.id SEPARATOR ',') AS tagId,
                GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
         FROM t_sentences TS
                  LEFT JOIN
@@ -60,7 +61,6 @@
         ORDER BY RAND() -- 随机排序
             LIMIT 1; -- 只取一条数据
     </select>
-
 
     <select id="getAll"  resultType="work.dduo.ans.model.vo.response.GetAllResp" >
         SELECT * FROM t_sentences;
