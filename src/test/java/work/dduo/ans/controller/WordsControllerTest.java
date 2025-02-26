@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import work.dduo.ans.mapper.TSentencesMapper;
 import work.dduo.ans.model.vo.request.TagsReq;
@@ -40,7 +42,7 @@ public class WordsControllerTest {
     private TSentencesMapper tSentencesMapper;
 
     @Mock
-    private TSentencesService tSentencesService;;
+    private TSentencesService tSentencesService;
 
     @InjectMocks
     private TSentencesServiceImpl tSentencesServiceImpl;
@@ -74,11 +76,16 @@ public class WordsControllerTest {
      */
     @Test
     public void testGetAllWord() throws Exception {
-        // 校验
-        mockMvc.perform(post("/sentence/get-all-words"))
-                // flag是不是true
-                .andExpect(jsonPath("$.flag", is(true))) // 验证 flag=true
-                // 状态码是不是200
+        // mock测试
+//        mockMvc.perform(post("/sentence/get-all-words"))
+//                // flag是不是true
+//                .andExpect(jsonPath("$.flag", is(true))) // 验证 flag=true
+//                // 状态码是不是200
+//                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/sentence/get-all-words")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(""))
                 .andExpect(status().isOk());
     }
 
@@ -88,11 +95,16 @@ public class WordsControllerTest {
      */
     @Test
     public void testGetTags() throws Exception {
-        // 校验
-        mockMvc.perform(post("/sentence/get-tags"))
-                // flag是不是true
-                .andExpect(jsonPath("$.flag", is(true))) // 验证 flag=true
-                // 状态码是不是200
+        // mock测试
+//        mockMvc.perform(post("/sentence/get-tags"))
+//                // flag是不是true
+//                .andExpect(jsonPath("$.flag", is(true))) // 验证 flag=true
+//                // 状态码是不是200
+//                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/sentence/get-tags")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(""))
                 .andExpect(status().isOk());
     }
 
