@@ -2,13 +2,9 @@ package work.dduo.ans.manager.factory;
 
 
 import cn.hutool.extra.spring.SpringUtil;
-
-//import com.ican.entity.ExceptionLog;
-//import com.ican.entity.OperationLog;
-//import com.ican.entity.VisitLog;
-//import com.ican.service.ExceptionLogService;
-//import com.ican.service.OperationLogService;
-//import com.ican.service.VisitLogService;
+import work.dduo.ans.domain.TVisitLog;
+import work.dduo.ans.service.TSentencesService;
+import work.dduo.ans.service.TVisitLogService;
 
 import java.util.TimerTask;
 
@@ -40,13 +36,13 @@ public class AsyncFactory {
      * @param visitLog 访问日志信息
      * @return 任务task
      */
-//    public static TimerTask recordVisit(VisitLog visitLog) {
-//        return new TimerTask() {
-//            @Override
-//            public void run() {
-//                SpringUtil.getBean(VisitLogService.class).saveVisitLog(visitLog);
-//            }
-//        };
-//    }
+    public static TimerTask recordVisit(TVisitLog tVisitLog) {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                SpringUtil.getBean(TVisitLogService.class).saveVisitLog(tVisitLog);
+            }
+        };
+    }
 
 }
