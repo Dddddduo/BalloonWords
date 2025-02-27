@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import work.dduo.ans.annotation.VisitLogger;
 import work.dduo.ans.model.Result;
 import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
@@ -29,6 +30,7 @@ public class WordsController {
      */
     @ApiOperation(value = "获取所有标签")
     @PostMapping("/get-tags")
+    @VisitLogger(value = "获取所有标签")
     public Result<?> getTags() {
         return Result.success(tSentencesService.getAllTags());
     }
@@ -39,6 +41,7 @@ public class WordsController {
      */
     @ApiOperation(value = "获取所有句子")
     @PostMapping("/get-all-words")
+    @VisitLogger(value = "获取所有句子")
     public Result<?> getAllWords() {
         return Result.success(tSentencesService.getAll());
     }
@@ -49,6 +52,7 @@ public class WordsController {
      */
     @ApiOperation(value = "随机获取一条句子")
     @PostMapping("/get")
+    @VisitLogger(value = "随机获取一条句子")
     public Result<?> getWord() {
         GetRespVO getRespVO = tSentencesService.get();
         if(getRespVO!=null){
@@ -64,6 +68,7 @@ public class WordsController {
      */
     @ApiOperation(value = "根据标签获取句子")
     @PostMapping("/get-all-by-tags")
+    @VisitLogger(value = "根据标签获取所有句子")
     public Result<?> getAllByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
         List<GetAllResp> allByTags = tSentencesService.getAllByTags(tagsList);
         return Result.success(allByTags);
@@ -75,6 +80,7 @@ public class WordsController {
      */
     @ApiOperation(value = "根据标签随机获取一条句子")
     @PostMapping("/get-by-tags")
+    @VisitLogger(value = "根据标签随机获取一条句子")
     public Result<?> getByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
         GetRespVO getRespVO  = tSentencesService.getByTags(tagsList);
         return Result.success(getRespVO);

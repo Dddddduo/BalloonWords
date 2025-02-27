@@ -8,6 +8,10 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
 
 我们的愿景是让每个字节都绽放成充满哲理的气球，轻盈地悬浮在现实与想象的交汇点。
 
+## 📖 官方文档
+
+详细开发指南、API文档及设计规范请访问官方文档：  [https://dddddduo.github.io/BalloonWords/](https://dddddduo.github.io/BalloonWords/)
+
 ## 🌌 项目灵感  
 
 <div align="center">
