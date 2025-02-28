@@ -7,6 +7,8 @@ import work.dduo.ans.service.TVisitLogService;
 import work.dduo.ans.mapper.TVisitLogMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
 * @author ZDY
 * @description 针对表【t_visit_log】的数据库操作Service实现
@@ -21,6 +23,7 @@ public class TVisitLogServiceImpl extends ServiceImpl<TVisitLogMapper, TVisitLog
 
     @Override
     public void saveVisitLog(TVisitLog tVisitLog) {
+//        tVisitLog.setCreateTime(new Date());
         tVisitLogMapper.insert(tVisitLog);
     }
 }
