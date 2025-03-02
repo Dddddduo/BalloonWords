@@ -53,6 +53,12 @@ spring:
           max-idle: 100
           # 连接池中的最小空闲连接
           min-idle: 50
+  # 配置Rabbitmq
+  rabbitmq:
+    host: 113.44.34.176
+    port: 15672
+    username: admin
+    password: bdfb429f
 
 # 配置线程池
 thread:

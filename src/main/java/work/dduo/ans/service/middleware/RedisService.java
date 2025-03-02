@@ -1,4 +1,4 @@
-package work.dduo.ans.service;
+package work.dduo.ans.service.middleware;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;

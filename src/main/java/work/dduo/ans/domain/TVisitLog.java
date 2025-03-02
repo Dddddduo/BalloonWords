@@ -40,6 +40,7 @@ public class TVisitLog implements Serializable {
 
     /**
      * 访问时间
+     * 使用mybatis-plus的元对象处理器自动填充
      */
     @TableField(fill=FieldFill.INSERT)
     private Date createTime;

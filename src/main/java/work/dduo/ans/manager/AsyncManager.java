@@ -21,7 +21,7 @@ public class AsyncManager {
     }
 
     /**
-     * 饿汉式，在类加载的时候立刻进行实例化
+     * 饿汉式单例，在类加载的时候立刻进行实例化
      */
     private static final AsyncManager INSTANCE = new AsyncManager();
 
@@ -47,6 +47,8 @@ public class AsyncManager {
     /**
      * 停止任务线程池
      */
-    public void shutdown() { ThreadUtils.shutdownAndAwaitTermination(executor);}
+    public void shutdown() {
+        ThreadUtils.shutdownAndAwaitTermination(executor);
+    }
 
 }
