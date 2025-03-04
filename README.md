@@ -1,7 +1,9 @@
 # BallonWords 🎈  
 **——让文字灵感如气球般自由漂浮，飞向无限的云端**
 
-## Github Star 走势
+**（高度复刻来源于一言）**
+
+## ⭐ 项目 Github Star 走势
 [![Star History Chart](https://api.star-history.com/svg?repos=Dddddduo/BalloonWords&type=Date)](https://star-history.com/#Dddddduo/BalloonWords&Date)
 
 ## 🎪 项目介绍  
