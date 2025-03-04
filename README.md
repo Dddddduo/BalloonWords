@@ -1,6 +1,9 @@
 # BallonWords 🎈  
 **——让文字灵感如气球般自由漂浮，飞向无限的云端**
 
+## Github Star 走势
+[![Star History Chart](https://api.star-history.com/svg?repos=Dddddduo/BalloonWords&type=Date)](https://star-history.com/#Dddddduo/BalloonWords&Date)
+
 ## 🎪 项目介绍  
 BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注入生命力。通过动态气球特效，我们将每一句打动人心的文字承载在气球上，让经典台词、网络金句、文学摘录等灵感以趣味化的方式漂浮于数字世界，逐步构建一个持续扩展的开放式语句库。
 
