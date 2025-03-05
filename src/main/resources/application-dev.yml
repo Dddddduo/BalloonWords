@@ -56,9 +56,29 @@ spring:
   # 配置Rabbitmq
   rabbitmq:
     host: 113.44.34.176
-    port: 15672
+    port: 5672
     username: admin
     password: bdfb429f
+#   基本队列配置
+    template:
+      default-receive-queue: default_queue # 默认接收队列
+      receive-timeout: 5000     # 接收超时时间（毫秒）
+      retry:
+        enabled: true           # 发送端重试
+        max-attempts: 3
+        initial-interval: 1000
+#   监听器设置 死信队列配置 (如果需要延迟队列)
+    listener:
+      simple:
+        acknowledge-mode: manual  #消息确认方式
+        concurrency: 5            # 最小消费者数
+        max-concurrency: 20       # 最大消费者数
+        prefetch: 50              # 每个消费者最大未确认消息数
+        default-requeue-rejected: false  # 拒绝后不走重试，直接进死信
+        retry:
+          max-attempts: 3
+          enabled: true
+          initial-interval: 1000
 
 # 配置线程池
 thread:
