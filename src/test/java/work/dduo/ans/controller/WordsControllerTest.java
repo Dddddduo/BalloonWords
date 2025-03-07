@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import work.dduo.ans.mapper.TSentencesMapper;
+import work.dduo.ans.model.Result;
 import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetResp;
@@ -59,9 +60,9 @@ public class WordsControllerTest {
      */
     @Test
     public void testGetWord() throws Exception {
-        GetRespVO mockResp = new GetRespVO();
+        Result mockResp = new Result();
 
-        when(tSentencesService.get()).thenReturn(mockResp);
+        when(wordsController.getWord()).thenReturn(mockResp);
         // 校验
         mockMvc.perform(post("/sentence/get"))
                 // flag是不是true
