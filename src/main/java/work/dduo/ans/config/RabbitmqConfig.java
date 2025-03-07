@@ -30,4 +30,6 @@ public class RabbitmqConfig {
                 .with("balloonWords.routingKey"); // 需与发送时routingKey一致
     }
 
+
+
 }

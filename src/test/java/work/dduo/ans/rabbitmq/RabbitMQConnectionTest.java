@@ -12,6 +12,9 @@ import java.util.Date;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * 注意测试完成后要清空消息队列
+ */
 @SpringBootTest
 public class RabbitMQConnectionTest {
 

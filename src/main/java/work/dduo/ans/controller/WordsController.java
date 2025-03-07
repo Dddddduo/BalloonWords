@@ -1,5 +1,7 @@
 package work.dduo.ans.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
+import work.dduo.ans.service.middleware.RabbitMqService;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class WordsController {
     @Autowired
     private TSentencesService tSentencesService;
 
+    @Autowired
+    private RabbitMqService rabbitMqService;
     /**
      * 获取所有标签
      * @return
@@ -53,13 +58,23 @@ public class WordsController {
     @ApiOperation(value = "随机获取一条句子")
     @PostMapping("/get")
     @VisitLogger(value = "随机获取一条句子")
-    public Result<?> getWord() {
-        GetRespVO getRespVO = tSentencesService.get();
-        if(getRespVO!=null){
-            return Result.success(getRespVO);
-        }else {
-            return Result.fail("null");
-        }
+//    public Result<?> getWord() {
+//        GetRespVO getRespVO = tSentencesService.get();
+//        if(getRespVO!=null){
+//            return Result.success(getRespVO);
+//        }else {
+//            return Result.fail("null");
+//        }
+//    }
+    // 消息队列解耦解耦
+    public Result<?> getWord() throws JsonProcessingException {
+        // 发起请求
+        tSentencesService.get();
+        // 去消息队列里面拿
+        String jsonStr =  rabbitMqService.receiveMessage("balloonWords.queue", 1000);
+        ObjectMapper objectMapper = new ObjectMapper();
+        GetRespVO getRespVO = objectMapper.readValue(jsonStr,  GetRespVO.class);   // jsonStr为序列化后的字符串
+        return Result.success(getRespVO);
     }
 
     /**

@@ -1,5 +1,6 @@
 package work.dduo.ans.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -18,7 +19,8 @@ import java.util.List;
 * @createDate 2025-02-14 23:27:19
 */
 public interface TSentencesService extends IService<TSentences> {
-    GetRespVO get();
+//    GetRespVO get();
+    void get() throws JsonProcessingException;
 
     List<GetAllResp> getAll();
 
