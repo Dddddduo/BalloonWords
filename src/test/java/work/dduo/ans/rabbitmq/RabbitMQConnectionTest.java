@@ -18,36 +18,34 @@ public class RabbitMQConnectionTest {
     @Autowired
     private RabbitMqService rabbitMqService;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
     @Test
     // 测试消息队列的连接
     public void testRabbitMQConnection() throws InterruptedException {
         String testMessage = "Test message at " + new Date();
         // 发送测试消息
-        rabbitMqService.send("balloonWords.routingKey", testMessage);
+        rabbitMqService.sendDirect("balloonWords.routingKey", testMessage);
         // 等待消息处理
         Thread.sleep(1000);
         // 验证消息是否到达队列
-        Message received = rabbitTemplate.receive("balloonWords.queue", 3000);
+        String message = rabbitMqService.receiveMessage("balloonWords.queue", 1000);
         // 判断参数
-        assertNotNull(received);
-        assertEquals(testMessage, new String(received.getBody()));
-        System.out.println(received);
+        assertNotNull(message);
+        assertEquals(testMessage,message);
+        System.out.println(message);
     }
 
     @Test
     // 仅仅生产消息
     public void testRabbitMQSend() throws InterruptedException {
         String testMessage = "Test message at " + new Date();
-        rabbitMqService.send("balloonWords.routingKey", testMessage);
+        rabbitMqService.sendDirect("balloonWords.routingKey", testMessage);
     }
 
     @Test
     // 仅仅消费消息
     public void testRabbitMQReceive() throws InterruptedException {
-        Message received = rabbitTemplate.receive("balloonWords.queue");
-        System.out.println(received);
+        String message =  rabbitMqService.receiveMessage("balloonWords.queue", 1000);
+        System.out.println(message);
     }
 
 }
