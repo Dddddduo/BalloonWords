@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMqService {
+
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    // 发送到指定路由键
+    // 发送到指定路由键 用来绑定指定
     public void send(String routingKey, String message) {
-        rabbitTemplate.convertAndSend("demo.exchange", routingKey, message);
+        rabbitTemplate.convertAndSend("balloonWords.exchange", routingKey, message);
     }
 
 }
