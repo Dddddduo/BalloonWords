@@ -101,6 +101,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        <!-- RabbitMQ client-->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.14.2</version>
+        </dependency>
         <!-- jackson-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

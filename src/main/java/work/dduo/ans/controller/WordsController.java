@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,8 @@ import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.service.middleware.RabbitMqService;
 
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.*;
 
 @RestController
 @RequestMapping("/sentence")
@@ -28,6 +30,10 @@ public class WordsController {
 
     @Autowired
     private RabbitMqService rabbitMqService;
+
+    private final CountDownLatch latch = new CountDownLatch(1);
+
+    private GetRespVO getRespVO;
     /**
      * 获取所有标签
      * @return
@@ -61,7 +67,7 @@ public class WordsController {
 //    public Result<?> getWord() {
 //        GetRespVO getRespVO = tSentencesService.get();
 //        if(getRespVO!=null){
-//            return Result.success(getRespVO);
+//            return Result.success(getRe   spVO);
 //        }else {
 //            return Result.fail("null");
 //        }
@@ -71,10 +77,27 @@ public class WordsController {
         // 发起请求
         tSentencesService.get();
         // 去消息队列里面拿
-        String jsonStr =  rabbitMqService.receiveMessage("balloonWords.queue", 1000);
-        ObjectMapper objectMapper = new ObjectMapper();
-        GetRespVO getRespVO = objectMapper.readValue(jsonStr,  GetRespVO.class);   // jsonStr为序列化后的字符串
+//        String balloonWordsSentenceString =  rabbitMqService.receiveMessage("balloonWords.queue", 1000);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString,  GetRespVO.class);   // jsonStr为序列化后的字符串
+//        return Result.success(getRespVO);
+        try {
+            // 等待从消息队列中接收到数据 要确保队列里有消息
+            latch.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         return Result.success(getRespVO);
+    }
+
+    // Rabbit监听器
+    @RabbitListener(queues = "balloonWords.queue")
+    public void listen(String balloonWordsSentenceString) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString,  GetRespVO.class);   // jsonStr为序列化后的字符串
+        this.getRespVO=getRespVO;
+        // 释放锁，允许 Controller 层返回数据
+        latch.countDown();
     }
 
     /**

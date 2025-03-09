@@ -88,8 +88,8 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         getRespVO.setTagName( StrUtil.split(tags, ','));
         // 序列化 对象转字符串
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonStr = objectMapper.writeValueAsString(getRespVO);
-        rabbitMqService.sendDirect("balloonWords.routingKey", jsonStr);
+        String balloonWordsSentenceString = objectMapper.writeValueAsString(getRespVO);
+        rabbitMqService.sendDirect("balloonWords.routingKey", balloonWordsSentenceString);
     }
 
     @Override
