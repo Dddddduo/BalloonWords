@@ -31,8 +31,8 @@ import work.dduo.ans.utils.IpUtils ;
 public class VisitLogAspect {
 
     @Pointcut("@annotation(work.dduo.ans.annotation.VisitLogger)")
-    public void visitLogPointCut() {
-    }
+
+    public void visitLogPointCut() {}
 
     /**
      * 连接点正常返回通知，拦截用户操作日志，正常执行完成后执行， 如果连接点抛出异常，则不会执行
@@ -51,17 +51,14 @@ public class VisitLogAspect {
         // 获取request（注意包名变化）
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
-
         TVisitLog tVisitLog = new TVisitLog();
         String ipAddress = ServletUtil.getClientIP(request);
         String ipSource = IpUtils.getIpSource(ipAddress);
-
         // 解析browser和os
         Map<String, String> userAgentMap = UserAgentUtils.parseOsAndBrowser(request.getHeader("User-Agent"));
         tVisitLog.setIpAddress(ipAddress);
         tVisitLog.setIpSource(ipSource);
         tVisitLog.setOs(userAgentMap.get("os"));
-
         // 保存到数据库（异步处理方式保持不变）
         AsyncManager.getInstance().execute(AsyncFactory.recordVisit(tVisitLog));
     }

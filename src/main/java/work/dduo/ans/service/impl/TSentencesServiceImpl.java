@@ -12,6 +12,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import work.dduo.ans.domain.TSentences;
+import work.dduo.ans.model.vo.request.AddSentenceReq;
 import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
@@ -212,4 +213,15 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         getRespVO.setTagName( StrUtil.split(tags.toString(), ','));
         return getRespVO;
     }
+
+    /**
+     * 添加句子
+     * @param addSentenceReq
+     * @return
+     */
+    @Override
+    public boolean add(AddSentenceReq addSentenceReq) {
+        tSentencesMapper.add();
+    }
+
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
 import work.dduo.ans.domain.TVisitLog;
+import work.dduo.ans.model.vo.request.AddSentenceReq;
 import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
@@ -30,4 +31,5 @@ public interface TSentencesService extends IService<TSentences> {
 
     GetRespVO getByTags( @Param("tagsList")  List<TagsReq> tagsList);
 
+    boolean add(AddSentenceReq addSentenceReq);
 }

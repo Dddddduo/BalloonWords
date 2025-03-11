@@ -21,6 +21,9 @@
         other2,other3
     </sql>
 
+<!--    添加一条句子-->
+    <insert id="add"></insert>
+
 
     <update id="setTS_hot">
         UPDATE t_sentences
