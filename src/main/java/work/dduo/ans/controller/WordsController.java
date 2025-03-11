@@ -54,6 +54,7 @@ public class WordsController {
     @PostMapping("/get-all-words")
     @VisitLogger(value = "获取所有句子")
     public Result<?> getAllWords() {
+        // todo 解耦 将mysql数据库查询到的数据走redis缓存
         return Result.success(tSentencesService.getAll());
     }
 
@@ -94,7 +95,7 @@ public class WordsController {
     @RabbitListener(queues = "balloonWords.queue")
     public void listen(String balloonWordsSentenceString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString,  GetRespVO.class);   // jsonStr为序列化后的字符串
+        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString,  GetRespVO.class);
         this.getRespVO=getRespVO;
         // 释放锁，允许 Controller 层返回数据
         latch.countDown();

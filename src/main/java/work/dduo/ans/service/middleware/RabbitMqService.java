@@ -9,7 +9,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Properties;
 
 @Service
 public class RabbitMqService {
@@ -75,23 +74,6 @@ public class RabbitMqService {
      */
     public void broadcast(String exchange, Object message) {
         rabbitTemplate.convertAndSend(exchange, "", message);
-    }
-
-    /**
-     * 获取指定队列的消息数量(消息积压量)
-     * @param queueName
-     * @return
-     */
-    public int getQueueNum(String queueName) {
-        // 获取队列属性（包含消息数量）
-        Properties queueProperties = rabbitAdmin.getQueueProperties(queueName);
-        // 若队列不存在会返回null，需做空指针判断
-        if (queueProperties == null) {
-            throw new RuntimeException("队列不存在");
-        }
-        // 获取消息数量（QUEUE_MESSAGE_COUNT是固定key）
-        Integer messageCount = (Integer) queueProperties.get(RabbitAdmin.QUEUE_MESSAGE_COUNT);
-        return messageCount;
     }
 
 }
