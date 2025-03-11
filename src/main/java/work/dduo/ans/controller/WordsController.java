@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import work.dduo.ans.annotation.VisitLogger;
 import work.dduo.ans.model.Result;
+import work.dduo.ans.model.vo.request.AddSentenceReq;
 import work.dduo.ans.model.vo.request.TagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
@@ -123,6 +124,18 @@ public class WordsController {
     public Result<?> getByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
         GetRespVO getRespVO  = tSentencesService.getByTags(tagsList);
         return Result.success(getRespVO);
+    }
+
+    /**
+     * 添加一条句子
+     * 正文 标签集合 作者
+     * @return boolean
+     */
+    @ApiOperation(value = "添加一条句子")
+    @PostMapping("/get-by-tags")
+    @VisitLogger(value = "添加一条句子")
+    public Result<?> add( @RequestBody AddSentenceReq addSentenceReq) {
+        return ( tSentencesService.add(addSentenceReq) ? Result.success("插入成功") :Result.fail("插入失败"));
     }
 
 }

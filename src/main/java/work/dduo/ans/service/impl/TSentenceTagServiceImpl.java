@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2025-02-14 23:27:19
 */
 @Service
+@Deprecated
 public class TSentenceTagServiceImpl extends ServiceImpl<TSentenceTagMapper, TSentenceTag>
     implements TSentenceTagService{
 

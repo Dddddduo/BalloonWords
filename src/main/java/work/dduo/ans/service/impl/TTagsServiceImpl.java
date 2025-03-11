@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 * @description 针对表【t_tags】的数据库操作Service实现
 * @createDate 2025-02-14 23:27:19
 */
+@Deprecated
 @Service
 public class TTagsServiceImpl extends ServiceImpl<TTagsMapper, TTags>
     implements TTagsService{

@@ -19,7 +19,7 @@ import java.util.List;
 */
 public interface TSentencesMapper extends BaseMapper<TSentences> {
     // 随机获取一条句子 朴实无华的多表联查
-    GetResp get();
+    GetResp get();TagsReq
 
     // sentence表的hot字段值加一
     void setTS_hot(Long i);
@@ -38,6 +38,8 @@ public interface TSentencesMapper extends BaseMapper<TSentences> {
 
     // 根据标签随机获取一条句子
     GetResp getByTags(@Param("tagsList") List<TagsReq> tagsList);
+
+    Boolean add();
 }
 
 
