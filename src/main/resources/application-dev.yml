@@ -41,7 +41,7 @@ spring:
       host: 113.44.34.176
       timeout: 2000
       database: 0
-      password: yourPassword
+      password: 1234
       port: 6379
       lettuce:
         pool:
