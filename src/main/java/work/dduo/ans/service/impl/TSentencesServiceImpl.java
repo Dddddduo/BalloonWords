@@ -126,35 +126,40 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     @Override
     // todo 这边我们使用redis来辅助mysql查询 因为数据库压力实在是太大了(服务器带宽太低)
     public List<GetAllResp>  getAll() {
-        // 1. 构建带业务标识的复合Key
-        String cacheKey = "balloonSentences:all" + DATA_VERSION;
-        // 2. 带熔断的缓存读取 如果缓存击中 直接返回即可 返回的是所有数据
-        List <GetAllResp>  cachedData = redisService.getList(cacheKey,0,-1);
-        if (cachedData != null) {
-            if (cachedData.isEmpty())  { // 空值缓存处理
-                return Collections.emptyList();
-            }
-            return cachedData;
-        }
-        // 3. 分布式锁防穿透
-        RLock lock = redissonClient.getLock("lock:"  + cacheKey);
+        // 异常处理
         try {
-            lock.lock(5,  TimeUnit.SECONDS);
-            // 二次检查
-            cachedData = redisService.getList(cacheKey,0,-1);
-            if (cachedData != null) return cachedData;
-            // 4. 数据库查询
-            List<GetAllResp> dbData = tSentencesMapper.getAll();
-            System.out.println("进行了数据库查询");
-            // 5. 异步写缓存（保证数据库操作成功）
-            CompletableFuture.runAsync(()  -> {
-                // 随机化TTL防雪崩
-                redisService.setList(cacheKey,dbData,RandomUtil.randomInt(30,  60), TimeUnit.MINUTES);
-            });
-            return dbData;
-        } finally {
-            lock.unlock();
+            // 1. 构建带业务标识的复合Key
+            String cacheKey = "balloonSentences:all" + DATA_VERSION;
+            // 2. 带熔断的缓存读取 如果缓存击中 直接返回即可 返回的是所有数据
+            List <GetAllResp>  cachedData = redisService.getList(cacheKey,0,-1);
+            if (cachedData != null) {
+                if (cachedData.isEmpty())  { // 空值缓存处理
+                    return Collections.emptyList();
+                }
+                return cachedData;
+            }
+            // 3. 分布式锁防穿透
+            RLock lock = redissonClient.getLock("lock:"  + cacheKey);
+            try {
+                lock.lock(5,  TimeUnit.SECONDS);
+                // 二次检查
+                cachedData = redisService.getList(cacheKey,0,-1);
+                if (cachedData != null) return cachedData;
+                // 4. 数据库查询
+                List<GetAllResp> dbData = tSentencesMapper.getAll();
+                // 5. 异步写缓存（保证数据库操作成功）
+                CompletableFuture.runAsync(()  -> {
+                    // 随机化TTL防雪崩
+                    redisService.setList(cacheKey,dbData,RandomUtil.randomInt(30,  60), TimeUnit.MINUTES);
+                });
+                return dbData;
+            } finally {
+                lock.unlock();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**
