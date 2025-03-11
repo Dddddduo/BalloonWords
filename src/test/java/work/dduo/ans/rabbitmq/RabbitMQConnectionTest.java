@@ -81,7 +81,7 @@ public class RabbitMQConnectionTest {
     @Test
     // 查看指定队列的消息数量
     public void getQueueNum(){
-        int queueNum = rabbitMqService.getQueueNum("balloonWords.queue");
+        int queueNum = rabbitMqService.getMessageCount("balloonWords.queue");
         System.out.println(queueNum);
     }
 
