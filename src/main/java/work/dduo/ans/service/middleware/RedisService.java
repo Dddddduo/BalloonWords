@@ -332,8 +332,11 @@ public class RedisService {
      * @return 指定范围内的列表数据
      */
     public <T> List<T> getList(String key, long start, long end) {
+        // TODO 要做空值判断 这边如果没有数据返回的集合大小是0 而不是返回一个null
         List<T> result = (List<T>) redisTemplate.opsForList().range(key, start, end);
-        return result;
+        if(result.size()==0){
+            return null;
+        }else return result;
     }
 
     /**
