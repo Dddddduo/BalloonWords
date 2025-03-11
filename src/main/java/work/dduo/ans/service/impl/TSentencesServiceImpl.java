@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.annotations.Param;
+import org.redisson.Redisson;
 import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import work.dduo.ans.domain.TSentences;
@@ -48,6 +50,9 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     /**
      * 返回一条句子 随机返回一条句子
@@ -118,6 +123,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 //        List<GetAllResp> sentencesList = tSentencesMapper.getAll();
 //        return sentencesList;
 //    }
+    @Override
     // todo 这边我们使用redis来辅助mysql查询 因为数据库压力实在是太大了(服务器带宽太低)
     public List<GetAllResp>  getAll() {
         // 1. 构建带业务标识的复合Key
@@ -139,9 +145,10 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
             if (cachedData != null) return cachedData;
             // 4. 数据库查询
             List<GetAllResp> dbData = tSentencesMapper.getAll();
+            System.out.println("进行了数据库查询");
             // 5. 异步写缓存（保证数据库操作成功）
             CompletableFuture.runAsync(()  -> {
-                // 随机TTL防雪崩
+                // 随机化TTL防雪崩
                 redisService.setList(cacheKey,dbData,RandomUtil.randomInt(30,  60), TimeUnit.MINUTES);
             });
             return dbData;
