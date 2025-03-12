@@ -58,27 +58,12 @@ GROUP BY TS.id, TS.content, TS.create_time, TS.from, TS.hot, TS.other1, TS.other
 ALTER TABLE t_sentences
     MODIFY COLUMN create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
--- 数据库事务 进行多表操作 添加一个句子 同步更新sentence表和中间表sentence_tag表
--- 开始事务
-START TRANSACTION;
--- 插入主表数据（假设create_time字段由数据库自动生成）
-INSERT INTO t_sentences (content, `from`, hot)
-VALUES ('生活不止眼前的苟且，还有诗和远方。', '高晓松', 0);
--- 假设hot默认0，其他字段按需处理
+# 将t_sentences_tags表的主键id字段设置自增
+ALTER TABLE t_sentence_tag MODIFY id INT AUTO_INCREMENT;
 
--- 获取新插入句子的自增ID
-SET @sentence_id = LAST_INSERT_ID();
+# 将t_sentences_tags表的create_time字段设置为自动填充
+ALTER TABLE t_sentence_tag
+    MODIFY COLUMN create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
--- 批量查询标签ID（确保标签存在）
-SELECT id
-INTO @tag_ids
-FROM t_tags
-WHERE `name` IN ('青春', '故事');
-
--- 插入中间表（批量操作）
-INSERT INTO t_sentence_tag (sentence_id, tag_id)
-SELECT @sentence_id, id
-FROM t_tags
-WHERE `name` IN ('青春', '故事');
-
-COMMIT;
+-- 查看当前线程状态
+SHOW PROCESSLIST;
