@@ -812,6 +812,7 @@
                         <li>Maven 3.8+</li>
                         <li>MySQL 8.0+</li>
                         <li>Redis 6.0+</li>
+                        <li>RabbitMQ 3.14+</li>
                     </ul>
                 </div>
 
@@ -891,18 +892,28 @@
                 <h4>JUnit5+Mockito</h4>
                 <p>单元测试</p>
             </div>
+            <div class="tech-item">
+                <h4>Transactional</h4>
+                <p>事务管理</p>
+            </div>
         </div>
 
         <div id="progress" class="progress-section">
             <h2>✅ 后期展望</h2>
             <div class="progress-item">
-                <span>缓存Redis降低数据库压力</span>
+                <span>引入Elasticsearch</span>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 10%"></div>
                 </div>
             </div>
             <div class="progress-item">
-                <span>引入Elasticsearch</span>
+                <span>使用cannel实时检测mysql</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 10%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <span>github自动化部署</span>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 10%"></div>
                 </div>
@@ -922,9 +933,19 @@
                 <p>多表联查实现第一个接口 /get</p>
             </div>
             <div class="update-item">
-                <div class="update-date">2024-03-01 ~ 2024-03-07</div>
+                <div class="update-date">2024-03-01 ~ 2024-03-05</div>
                 <p>消息队列使用</p>
-                <p>RabbitMQ解耦接口 提高吞吐量</p>
+                <p>RabbitMQ解耦接口 用Spring事件监听器控制上下文同步 </p>
+            </div>
+            <div class="update-item">
+                <div class="update-date">2024-03-05 ~ 2024-03-10</div>
+                <p>使用redis降低数据库压力</p>
+                <p>分布式锁套redissonClient防穿透防止缓存穿透</p>
+            </div>
+            <div class="update-item">
+                <div class="update-date">2024-03-10 ~ 2024-03-13</div>
+                <p>使用spring事务控制增添操作的原子性</p>
+                <p>Transactional注解控制超时管理 事务回滚</p>
             </div>
         </div>
 
