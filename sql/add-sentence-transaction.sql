@@ -22,4 +22,5 @@ SELECT
 FROM t_tags
 WHERE `name` IN ('青春', '故事');
 
+-- 提交事务
 COMMIT;
