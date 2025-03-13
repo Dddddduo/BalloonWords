@@ -1,4 +1,8 @@
 -- 数据库事务 进行多表操作 添加一个句子 同步更新sentence表和中间表sentence_tag表
+
+-- 设置事务的最大执行时间为5000毫秒
+SET max_execution_time = 5000;
+
 -- 开始事务
 START TRANSACTION;
 -- 插入主表数据（假设create_time字段由数据库自动生成）

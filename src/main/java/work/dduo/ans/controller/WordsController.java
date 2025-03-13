@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import work.dduo.ans.annotation.VisitLogger;
 import work.dduo.ans.model.Result;
-import work.dduo.ans.model.vo.request.AddSentenceReq;
-import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.dto.AddSentenceDTO;
+import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
@@ -35,10 +35,11 @@ public class WordsController {
     private final CountDownLatch latch = new CountDownLatch(1);
 
     private GetRespVO getRespVO;
+
     /**
      * 获取所有标签
-     * @return
      *
+     * @return
      */
     @ApiOperation(value = "获取所有标签")
     @PostMapping("/get-tags")
@@ -49,6 +50,7 @@ public class WordsController {
 
     /**
      * 获取所有句子
+     *
      * @return
      */
     @ApiOperation(value = "获取所有句子")
@@ -61,6 +63,7 @@ public class WordsController {
 
     /**
      * 随机获取一条句子
+     *
      * @return GetRespVO
      */
     @ApiOperation(value = "随机获取一条句子")
@@ -96,46 +99,55 @@ public class WordsController {
     @RabbitListener(queues = "balloonWords.queue")
     public void listen(String balloonWordsSentenceString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString,  GetRespVO.class);
-        this.getRespVO=getRespVO;
+        GetRespVO getRespVO = objectMapper.readValue(balloonWordsSentenceString, GetRespVO.class);
+        this.getRespVO = getRespVO;
         // 释放锁，允许 Controller 层返回数据
         latch.countDown();
     }
 
+
     /**
      * 根据标签获取所有句子
+     *
      * @return
      */
     @ApiOperation(value = "根据标签获取句子")
     @PostMapping("/get-all-by-tags")
     @VisitLogger(value = "根据标签获取所有句子")
-    public Result<?> getAllByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
+    public Result<?> getAllByTags(@Param("tagsList") @RequestBody List<AddTagsReq> tagsList) {
         List<GetAllResp> allByTags = tSentencesService.getAllByTags(tagsList);
         return Result.success(allByTags);
     }
 
     /**
      * 根据标签随机获取一条句子
+     *
      * @return
      */
     @ApiOperation(value = "根据标签随机获取一条句子")
     @PostMapping("/get-by-tags")
     @VisitLogger(value = "根据标签随机获取一条句子")
-    public Result<?> getByTags(@Param("tagsList") @RequestBody List<TagsReq> tagsList) {
-        GetRespVO getRespVO  = tSentencesService.getByTags(tagsList);
+    public Result<?> getByTags(@Param("tagsList") @RequestBody List<AddTagsReq> tagsList) {
+        GetRespVO getRespVO = tSentencesService.getByTags(tagsList);
         return Result.success(getRespVO);
     }
 
     /**
      * 添加一条句子
      * 正文 标签集合 作者
+     *
      * @return boolean
      */
     @ApiOperation(value = "添加一条句子")
-    @PostMapping("/get-by-tags")
+    @PostMapping("/add")
     @VisitLogger(value = "添加一条句子")
-    public Result<?> add( @RequestBody AddSentenceReq addSentenceReq) {
-        return ( tSentencesService.add(addSentenceReq) ? Result.success("插入成功") :Result.fail("插入失败"));
+    public Result<?> add(@RequestBody AddSentenceDTO addSentenceDTO) throws Exception {
+        boolean judge = tSentencesService.addSentenceWithTags(addSentenceDTO);
+        if(judge){
+            return Result.success("插入成功");
+        }else{
+            return Result.fail("插入失败");
+        }
     }
 
 }

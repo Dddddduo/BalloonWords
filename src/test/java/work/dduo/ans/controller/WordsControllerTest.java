@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import work.dduo.ans.mapper.TSentencesMapper;
 import work.dduo.ans.model.Result;
-import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
@@ -19,6 +19,7 @@ import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.service.impl.TSentencesServiceImpl;
 
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -115,7 +116,7 @@ public class WordsControllerTest {
      */
     @Test
     public void testGetByTags() throws Exception {
-        List<TagsReq> tagsList = Collections.singletonList(new TagsReq());
+        List<AddTagsReq> tagsList = Collections.singletonList(new AddTagsReq());
         GetResp mockResp = new GetResp();
         mockResp.setId(1L);
         mockResp.setContent("original content");
@@ -147,7 +148,7 @@ public class WordsControllerTest {
     @Test
     public void testGetAllByTags() throws Exception {
         // 准备mock数据
-        List<TagsReq> tagsList = Collections.singletonList(new TagsReq());
+        List<AddTagsReq> tagsList = Collections.singletonList(new AddTagsReq());
         List<GetAllResp> expectedList = Arrays.asList(new GetAllResp(), new GetAllResp());
 
         // Mock Mapper行为
@@ -160,6 +161,10 @@ public class WordsControllerTest {
         assertEquals(expectedList, result);
         verify(tSentencesMapper).getAllByTags(tagsList);
     }
+
+    /**
+     * 插入一条数据
+     */
 
 
 }

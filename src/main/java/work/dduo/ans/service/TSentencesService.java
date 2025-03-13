@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.ibatis.annotations.Param;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
-import work.dduo.ans.domain.TVisitLog;
-import work.dduo.ans.model.vo.request.AddSentenceReq;
-import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.dto.AddSentenceDTO;
+import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
-import work.dduo.ans.model.vo.response.GetAllResp;
 
 import java.util.List;
 
@@ -27,9 +25,9 @@ public interface TSentencesService extends IService<TSentences> {
 
     List<GetAllTagsResp> getAllTags();
 
-    List<GetAllResp> getAllByTags( @Param("tagsList") List<TagsReq> tagsList);
+    List<GetAllResp> getAllByTags( @Param("tagsList") List<AddTagsReq> tagsList);
 
-    GetRespVO getByTags( @Param("tagsList")  List<TagsReq> tagsList);
+    GetRespVO getByTags( @Param("tagsList")  List<AddTagsReq> tagsList);
 
-    boolean add(AddSentenceReq addSentenceReq);
+    boolean addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception;
 }

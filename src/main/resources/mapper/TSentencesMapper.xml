@@ -5,25 +5,41 @@
 <mapper namespace="work.dduo.ans.mapper.TSentencesMapper">
 
     <resultMap id="BaseResultMap" type="work.dduo.ans.domain.TSentences">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="from" column="from" jdbcType="VARCHAR"/>
-            <result property="hot" column="hot" jdbcType="VARCHAR"/>
-            <result property="other1" column="other1" jdbcType="VARCHAR"/>
-            <result property="other2" column="other2" jdbcType="VARCHAR"/>
-            <result property="other3" column="other3" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="from" column="from" jdbcType="VARCHAR"/>
+        <result property="hot" column="hot" jdbcType="VARCHAR"/>
+        <result property="other1" column="other1" jdbcType="VARCHAR"/>
+        <result property="other2" column="other2" jdbcType="VARCHAR"/>
+        <result property="other3" column="other3" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,content,create_time,
+        id
+        ,content,create_time,
         from,hot,other1,
         other2,other3
     </sql>
 
-<!--    添加一条句子-->
-    <insert id="add"></insert>
-
+    <!-- 添加句子主记录以及插入标签关联（带事务控制） -->
+    <!-- 添加句子主记录 -->
+    <insert id="addSentence" parameterType="work.dduo.ans.model.vo.request.AddSentenceReq"
+            useGeneratedKeys="true" keyProperty="sentenceId">
+        INSERT INTO t_sentences
+            (content, `from`, hot)
+        VALUES (#{content}, #{from}, 0)
+    </insert>
+    <!-- 批量插入标签关联 -->
+    <insert id="batchInsertTags" parameterType="work.dduo.ans.model.vo.request.AddSentenceTagReq">
+        INSERT INTO t_sentence_tag (sentence_id, tag_id)
+        SELECT #{sentenceId}, id
+        FROM t_tags
+        WHERE `name` IN
+        <foreach item="tag" collection="tagsList" open="(" separator="," close=")">
+            #{tag.name}
+        </foreach>
+    </insert>
 
     <update id="setTS_hot">
         UPDATE t_sentences
@@ -31,11 +47,11 @@
         WHERE id = #{i}
     </update>
 
-<!--    <update id="setTT_hot">-->
-<!--        UPDATE t_tags-->
-<!--        SET hot = hot + 1-->
-<!--        WHERE id = #{i}-->
-<!--    </update>-->
+    <!--    <update id="setTT_hot">-->
+    <!--        UPDATE t_tags-->
+    <!--        SET hot = hot + 1-->
+    <!--        WHERE id = #{i}-->
+    <!--    </update>-->
 
     <update id="setTT_hot">
         UPDATE t_tags
@@ -47,13 +63,13 @@
     </update>
 
 
-<!--    todo 改掉join关键字的查询方法-->
+    <!--    todo 改掉join关键字的查询方法-->
     <select id="get" resultType="work.dduo.ans.model.vo.response.GetResp">
         SELECT TS.id,
                TS.content,
                TS.`from`,
                TS.hot,
-               GROUP_CONCAT(TT.id SEPARATOR ',') AS tagId,
+               GROUP_CONCAT(TT.id SEPARATOR ',')   AS tagId,
                GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
         FROM t_sentences TS
                  LEFT JOIN
@@ -65,30 +81,32 @@
             LIMIT 1; -- 只取一条数据
     </select>
 
-    <select id="getAll"  resultType="work.dduo.ans.model.vo.response.GetAllResp" >
-        SELECT * FROM t_sentences;
+    <select id="getAll" resultType="work.dduo.ans.model.vo.response.GetAllResp">
+        SELECT *
+        FROM t_sentences;
     </select>
     <select id="getAllTags" resultType="work.dduo.ans.model.vo.response.GetAllTagsResp">
-        SELECT * FROM t_tags;
+        SELECT *
+        FROM t_tags;
     </select>
 
     <select id="getAllByTags" resultType="work.dduo.ans.model.vo.response.GetAllResp">
         SELECT
-            TS.id,
-            TS.content,
-            TS.create_time,
-            TS.from,
-            TS.hot,
-            TS.other1,
-            TS.other2,
-            TS.other3,
-            GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
+        TS.id,
+        TS.content,
+        TS.create_time,
+        TS.from,
+        TS.hot,
+        TS.other1,
+        TS.other2,
+        TS.other3,
+        GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
         FROM
-            t_sentences TS
+        t_sentences TS
         LEFT JOIN
-            t_sentence_tag TST ON TS.id = TST.sentence_id
+        t_sentence_tag TST ON TS.id = TST.sentence_id
         LEFT JOIN
-            t_tags TT ON TST.tag_id = TT.id
+        t_tags TT ON TST.tag_id = TT.id
         WHERE
         TT.name IN
         <foreach item="tag" collection="tagsList" open="(" separator="," close=")">
@@ -100,21 +118,21 @@
 
     <select id="getByTags" resultType="work.dduo.ans.model.vo.response.GetResp">
         SELECT
-            TS.id,
-            TS.content,
-            TS.`from`,
-            TS.hot,
-            TT.id AS tagId,
-            TT.`from` AS tagFrom,
+        TS.id,
+        TS.content,
+        TS.`from`,
+        TS.hot,
+        TT.id AS tagId,
+        TT.`from` AS tagFrom,
         GROUP_CONCAT(TT.name SEPARATOR ',') AS tags
         FROM
-            t_sentences TS
+        t_sentences TS
         LEFT JOIN
-            t_sentence_tag TST ON TS.id = TST.sentence_id
+        t_sentence_tag TST ON TS.id = TST.sentence_id
         LEFT JOIN
-            t_tags TT ON TST.tag_id = TT.id
+        t_tags TT ON TST.tag_id = TT.id
         WHERE
-            TT.name IN
+        TT.name IN
         <foreach item="tag" collection="tagsList" open="(" separator="," close=")">
             #{tag.name}
         </foreach>

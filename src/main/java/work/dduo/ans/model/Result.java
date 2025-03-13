@@ -65,4 +65,9 @@ public class Result<T> {
         return r;
     }
 
+    // 配合mock进行快速测试
+    public boolean isSuccess(){
+        return this.flag;
+    }
+
 }
