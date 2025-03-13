@@ -65,5 +65,18 @@ ALTER TABLE t_sentence_tag MODIFY id INT AUTO_INCREMENT;
 ALTER TABLE t_sentence_tag
     MODIFY COLUMN create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
+-- 查询t_sentence_tag表里的所有数据
+SELECT * FROM t_sentence_tag;
+
 -- 查看当前线程状态
 SHOW PROCESSLIST;
+
+-- 查看所有会话状态
+SHOW FULL PROCESSLIST;
+
+-- 查看数据库表的存储引擎
+SHOW CREATE TABLE t_tags;
+SHOW CREATE TABLE t_sentences;
+SHOW CREATE TABLE t_sentence_tag;
+
+SHOW ENGINES;

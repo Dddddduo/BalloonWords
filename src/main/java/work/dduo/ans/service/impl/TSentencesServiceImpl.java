@@ -6,14 +6,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.annotations.Param;
-import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import work.dduo.ans.domain.TSentences;
+import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddSentenceReq;
-import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.vo.request.AddSentenceTagReq;
+import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetResp;
@@ -179,7 +181,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
      * @return
      */
     @Override
-    public List<GetAllResp> getAllByTags(@Param("tagsList") List<TagsReq> tagsList) {
+    public List<GetAllResp> getAllByTags(@Param("tagsList") List<AddTagsReq> tagsList) {
         List<GetAllResp> sentencesList = tSentencesMapper.getAllByTags(tagsList);
         return sentencesList;
     }
@@ -190,7 +192,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
      * @return
      */
     @Override
-    public GetRespVO getByTags(@Param("tagsList") List<TagsReq> tagsList) {
+    public GetRespVO getByTags(@Param("tagsList") List<AddTagsReq> tagsList) {
         GetResp getResp = tSentencesMapper.getByTags(tagsList);
         // 拿到数据库中数据
         String content = getResp.getContent();
@@ -216,12 +218,34 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     /**
      * 添加句子
-     * @param addSentenceReq
+     * @param addSentenceDTO
+     * @注意提交是一个事务 如果失败则回滚
      * @return
      */
-    @Override
-    public boolean add(AddSentenceReq addSentenceReq) {
-        tSentencesMapper.add();
+    @Transactional(rollbackFor = Exception.class,  timeout = 5)
+    public boolean addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception {
+        try {
+            // 主记录插入
+            AddSentenceReq addSentenceReq = addSentenceDTO.getAddSentenceReq();
+            tSentencesMapper.addSentence(addSentenceReq);
+            Long sentenceId = addSentenceReq.getSentenceId();
+            // 关联标签插入
+            List<AddTagsReq> tagsList = addSentenceDTO.getTagsList();
+            AddSentenceTagReq addSentenceTagReq = new AddSentenceTagReq();
+            addSentenceTagReq.setSentenceId(sentenceId);
+            addSentenceTagReq.setTagsList(tagsList);
+            int size = tagsList.size();
+            if (!tagsList.isEmpty())  {
+                int i = tSentencesMapper.batchInsertTags(addSentenceTagReq); // 返回的是改变的标签数量
+                if (i != size) {
+                    throw new Exception("传入无效标签");
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
     }
 
 }

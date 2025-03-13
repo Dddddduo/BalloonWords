@@ -7,6 +7,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagsReq {
+public class AddTagsReq {
     private String name;
 }

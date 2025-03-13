@@ -1,13 +1,15 @@
 package work.dduo.ans.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import work.dduo.ans.model.vo.request.TagsReq;
+import work.dduo.ans.model.vo.request.AddSentenceReq;
+import work.dduo.ans.model.vo.request.AddSentenceTagReq;
+import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetResp;
-import work.dduo.ans.model.vo.response.GetRespVO;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ import java.util.List;
 */
 public interface TSentencesMapper extends BaseMapper<TSentences> {
     // 随机获取一条句子 朴实无华的多表联查
-    GetResp get();TagsReq
+    GetResp get();
 
     // sentence表的hot字段值加一
     void setTS_hot(Long i);
@@ -34,12 +36,14 @@ public interface TSentencesMapper extends BaseMapper<TSentences> {
     List<GetAllTagsResp> getAllTags();
 
     // 根据标签获取所有句子
-    List<GetAllResp> getAllByTags(@Param("tagsList") List<TagsReq> tagsList);
+    List<GetAllResp> getAllByTags(@Param("tagsList") List<AddTagsReq> tagsList);
 
     // 根据标签随机获取一条句子
-    GetResp getByTags(@Param("tagsList") List<TagsReq> tagsList);
+    GetResp getByTags(@Param("tagsList") List<AddTagsReq> tagsList);
 
-    Boolean add();
+    int addSentence(AddSentenceReq addSentenceReq);
+
+    int batchInsertTags(AddSentenceTagReq addSentenceTagReq);
 }
 
 
