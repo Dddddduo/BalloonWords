@@ -1,8 +1,6 @@
 # BallonWords 🎈  
 **——让文字灵感如气球般自由漂浮，飞向无限的云端**
 
-**（高度复刻来源于一言）**
-
 ## ⭐ 项目 Github Star 走势
 [![Star History Chart](https://api.star-history.com/svg?repos=Dddddduo/BalloonWords&type=Date)](https://star-history.com/#Dddddduo/BalloonWords&Date)
 
@@ -25,27 +23,22 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
 </div>
 
 ## ✨ 项目特色  
-**Ballon 核心设计理念**  
-1. **精选词库气球化**  
-   - 利用Java集合框架构建动态词库，每个词句如同独立气球  
-   - 支持多维度分类标签（励志、哲理、诗词等）  
-   - 自动统计词频并为热词添加升空特效
-     
-2. **智能分析色彩情绪引擎**  
-   - 通过语句情感分析，自动匹配气球色系  
-   - 暖色系（励志红、温馨橙）  
-   - 冷色系（哲理蓝、诗词青）
 
-## ✅ 已实现功能和后期展望
+## ✅ 已实现功能和后期展望 (通过这个项目你可以学到)
   - [x] 词库管理数据库表的设计
   - [x] 初始化get接口的实现
   - [x] 根据标签去查询语句
   - [x] 引入消息队列RabbitMQ解耦
   - [x] 前端接口文档的开发并且上线
-  - [x] 引入redis缓存降低数据库查询的压力
-  - [x] 引入Elasticsearch
+  - [x] 使用异步化，线程池，分布式锁做并发控制
+  - [x] 面向AOP编程，实现日志管理 
+  - [x] 引入redis缓存降低数据库查询的压力，采用延迟双删+乐观锁
+  - [x] 引入Elasticsearch完善搜索引擎，定制化搜索
+  - [ ] Docker Compose一键部署
   - [ ] 使用cannel实时检测mysql
-  - [ ] github自动化部署
+  - [ ] github自动化配置
+  - [ ] 完成前端管理界面(vue) 并且使用satoken完成鉴权处理
+  - [ ] 使用jmeter进行压力测试，并完成报告
 
 ## 🌱 开发日志
 
