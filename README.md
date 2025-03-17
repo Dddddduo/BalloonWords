@@ -43,7 +43,7 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
   - [x] 引入消息队列RabbitMQ解耦
   - [x] 前端接口文档的开发并且上线
   - [x] 引入redis缓存降低数据库查询的压力
-  - [ ] 引入Elasticsearch
+  - [x] 引入Elasticsearch
   - [ ] 使用cannel实时检测mysql
   - [ ] github自动化部署
 
@@ -63,11 +63,15 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
 
 **3.05 - 3.10**
 - 使用redis降低数据库压力
-- 分布式锁套redissonClient防穿透防止缓存穿透
+- 使用分布式锁控制redissonClient防穿透防止缓存穿透
 
 **3.10 - 3.13**
 - 使用spring事务控制增添操作的原子性
 - Transactional注解控制超时管理 事务回滚
+
+**3.17 - 3.18**
+- 完成mysql和redis一致性操作 延时双删+使用版本号实现的乐观锁
+- 使用Elasticsearch完善搜索引擎
 
 ## 🛠️ 技术架构  
 
