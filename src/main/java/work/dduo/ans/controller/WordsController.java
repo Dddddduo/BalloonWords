@@ -142,12 +142,8 @@ public class WordsController {
     @PostMapping("/add")
     @VisitLogger(value = "添加一条句子")
     public Result<?> add(@RequestBody AddSentenceDTO addSentenceDTO) throws Exception {
-        boolean judge = tSentencesService.addSentenceWithTags(addSentenceDTO);
-        if(judge){
-            return Result.success("插入成功");
-        }else{
-            return Result.fail("插入失败");
-        }
+        tSentencesService.addSentenceWithTags(addSentenceDTO);
+        return Result.success();
     }
 
 }

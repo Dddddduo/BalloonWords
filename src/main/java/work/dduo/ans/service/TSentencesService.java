@@ -11,6 +11,7 @@ import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
 * @author ZDY
@@ -18,7 +19,8 @@ import java.util.List;
 * @createDate 2025-02-14 23:27:19
 */
 public interface TSentencesService extends IService<TSentences> {
-//    GetRespVO get();
+
+    //    GetRespVO get();
     void get() throws JsonProcessingException;
 
     List<GetAllResp> getAll();
@@ -29,7 +31,7 @@ public interface TSentencesService extends IService<TSentences> {
 
     GetRespVO getByTags( @Param("tagsList")  List<AddTagsReq> tagsList);
 
-    boolean addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception;
+    void addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception;
 
-    void updateCache();
+    void getAllUpdateCache();
 }
