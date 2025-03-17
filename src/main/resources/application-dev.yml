@@ -80,10 +80,10 @@ spring:
           enabled: true
           initial-interval: 1000
   # 配置Elasticsearch
-  elasticsearch:
-    uris: 113.44.34.176:9200
-    username: elastic
-    password: 123456
+#  elasticsearch:
+#    uris: 113.44.34.176:9200
+#    username: elastic
+#    password: 123456
 # 配置线程池
 thread:
   pool:

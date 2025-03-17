@@ -813,26 +813,59 @@
                         <li>MySQL 8.0+</li>
                         <li>Redis 6.0+</li>
                         <li>RabbitMQ 3.14+</li>
+                        <li>Elasticsearch 8.15+</li>
                     </ul>
                 </div>
 
                 <div class="quick-start-item">
-                    <h3>🔧 配置数据库</h3>
+                    <h3>🔧 配置中间件</h3>
                     <div class="code-block">
                         <div class="code-header">
-                            <span>application-dev.yml</span>
+                            <span>application-prod.yml</span>
                         </div>
                         <pre><code>spring:
+  # mysql配置
   datasource:
     url: jdbc:mysql://localhost:3306/balloon_words
     username: your_username
     password: your_password
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
+  # redis配置
   redis:
     host: localhost
     port: 6379
-    database: 0</code></pre>
+    database: 0
+  # rabbitmq配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: 123456
+    # 基本队列配置
+    template:
+      default-receive-queue: default_queue # 默认接收队列
+      receive-timeout: 5000     # 接收超时时间（毫秒）
+      retry:
+        enabled: true           # 发送端重试
+        max-attempts: 3
+        initial-interval: 1000
+    # 监听器设置 死信队列配置 (如果需要延迟队列)
+    listener:
+      simple:
+        acknowledge-mode: manual  #消息确认方式
+        concurrency: 5            # 最小消费者数
+        max-concurrency: 20       # 最大消费者数
+        prefetch: 50              # 每个消费者最大未确认消息数
+        default-requeue-rejected: false  # 拒绝后不走重试，直接进死信
+        retry:
+          max-attempts: 3
+          enabled: true
+          initial-interval: 1000
+  # elasticsearch配置
+  elasticsearch:
+      uris: localhost:9200
+      username: elastic
+      password: 123456</code></pre>
                     </div>
                 </div>
 
@@ -895,6 +928,10 @@
             <div class="tech-item">
                 <h4>Transactional</h4>
                 <p>事务管理</p>
+            </div>
+            <div class="tech-item">
+                <h4>配置Elasticsearch</h4>
+                <p>搜索引擎</p>
             </div>
         </div>
 
