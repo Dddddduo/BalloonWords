@@ -30,4 +30,6 @@ public interface TSentencesService extends IService<TSentences> {
     GetRespVO getByTags( @Param("tagsList")  List<AddTagsReq> tagsList);
 
     boolean addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception;
+
+    void updateCache();
 }

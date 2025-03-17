@@ -166,6 +166,24 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     }
 
     /**
+     * 更新数据库中的全表数据
+     */
+    public void updateCache() {
+        try{
+            // 1. 构建带业务标识的复合Key
+            String cacheKey = "balloonSentences:all" + DATA_VERSION;
+            List<GetAllResp> dbData = tSentencesMapper.getAll();
+            // 2. 异步写缓存（保证数据库操作成功）
+            CompletableFuture.runAsync(()  -> {
+                // 随机化TTL防雪崩
+                redisService.setList(cacheKey,dbData,RandomUtil.randomInt(30,  60), TimeUnit.MINUTES);
+            });
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    /**
      * 返回所有标签
      * @return
      */
