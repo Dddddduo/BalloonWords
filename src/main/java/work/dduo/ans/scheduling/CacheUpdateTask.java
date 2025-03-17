@@ -14,12 +14,15 @@ public class CacheUpdateTask {
     @Autowired
     private TSentencesService tSentencesService;
 
-    @Scheduled(fixedRate = 10 * 60 * 1000) // 每十分钟执行一次 
+    @Scheduled(fixedRate = 10 * 60 * 1000) // 每十分钟执行一次
+//    @Scheduled(fixedRate = 1000) // 每一秒执行一次
     public void updateCacheTask() {
+//        System.out.println("定时任务在执行");
         try {
-            tSentencesService.updateCache();
+            tSentencesService.getAllUpdateCache();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 } 

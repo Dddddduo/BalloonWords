@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@Deprecated
 @RunWith(MockitoJUnitRunner.class)
 public class SentenceAddTest {
 
