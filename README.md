@@ -70,13 +70,13 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
 
 ```mermaid
 graph TD
-    A[Java 17] --> B[Spring Boot] 
-    B --> C[词库引擎]
-    C --> D[Redis缓存池]
-    C --> E[MySQL词库]
-    B --> F[RESTful API]
-    F --> G[随机获取 /get]
-    F --> H[分类获取 /category]
+    A[Java 17] --> B[Spring Boot 2.6.14] 
+    B --> C[MySQL 8.0.36]
+    C --> D[Redis 6]
+    C --> E[Rabbitmq 3.12.4]
+    B --> F[Elasticsearch 8.15.0]
+    F --> G[Docker compose]
+    F --> H[cannel]
 ```
 
 ## 🛠️ 主要数据库表关系  
