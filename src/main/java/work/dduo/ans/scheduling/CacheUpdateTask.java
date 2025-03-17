@@ -1,0 +1,25 @@
+package work.dduo.ans.scheduling;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import work.dduo.ans.service.TSentencesService;
+
+/**
+ * 定时任务 每十分钟更新缓存
+ */
+@Component
+public class CacheUpdateTask {
+
+    @Autowired
+    private TSentencesService tSentencesService;
+
+    @Scheduled(fixedRate = 10 * 60 * 1000) // 每十分钟执行一次 
+    public void updateCacheTask() {
+        try {
+            tSentencesService.updateCache();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+} 
