@@ -1513,7 +1513,7 @@
 
         startCooldown();
 
-        fetch('http://182.92.125.34:8080/sentence/get')
+        fetch('https://balloonwords.gczdy.cn:8080/sentence/get')
             .then(response => response.json())
             .then(data => {
                 if (data.flag && data.data) {
