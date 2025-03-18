@@ -100,18 +100,21 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         String content = getResp.getContent();
         String tags = getResp.getTags();
         String tagId = getResp.getTagId();
-        // 句子的hot字段和标签的hot字段++
-        tSentencesMapper.setTS_hot(getResp.getId());
-        List<Long> tagList = Arrays.stream(tagId.split(","))
-                .map(tag -> {
-                    try {
-                        return Long.valueOf(tag);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                }).collect(Collectors.toList());
-        tSentencesMapper.setTT_hot(tagList);
+        // 防止NPE
+        if(!StrUtil.isEmpty(tags)&&!StrUtil.isEmpty(tagId)){
+            // 句子的hot字段和标签的hot字段++
+            tSentencesMapper.setTS_hot(getResp.getId());
+            List<Long> tagList = Arrays.stream(tagId.split(","))
+                    .map(tag -> {
+                        try {
+                            return Long.valueOf(tag);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }).collect(Collectors.toList());
+            tSentencesMapper.setTT_hot(tagList);
+        }
         // 脱敏后发送到消息队列
         GetRespVO getRespVO = new GetRespVO();
         getRespVO.setContent(content);
@@ -290,7 +293,6 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     /**
      * 强制刷新缓存
-     *
      * @param currentVersion
      */
     private void refreshCacheWithVersion(AtomicInteger currentVersion) {
@@ -312,12 +314,9 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
      */
     @Override
     public void getAllUpdateCache() {
-
         String cacheKey = "balloonSentences:all" + DATA_VERSION;
         List<GetAllResp> dbData = tSentencesMapper.getAll();
         redisService.setList(cacheKey, dbData, RandomUtil.randomInt(30, 60), TimeUnit.MINUTES);
-
     }
-
 
 }

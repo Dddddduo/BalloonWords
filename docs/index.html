@@ -6,15 +6,15 @@
     <title>BallonWords API 文档</title>
     <style>
         :root {
-            --primary-color: #ec4899;         /* 主粉色 */
-            --primary-light: #f472b6;         /* 浅粉色 */
-            --hover-color: #db2777;           /* 深粉色用于悬停 */
-            --secondary-color: #334155;        
-            --text-color: #475569;            
-            --bg-light: #f8fafc;              
-            --border-color: #e2e8f0;          
-            --code-bg: #f1f5f9;                /* 代码块背景 */
-            --code-text: #334155;              /* 代码文字颜色 */
+            --primary-color: #ec4899; /* 主粉色 */
+            --primary-light: #f472b6; /* 浅粉色 */
+            --hover-color: #db2777; /* 深粉色用于悬停 */
+            --secondary-color: #334155;
+            --text-color: #475569;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9; /* 代码块背景 */
+            --code-text: #334155; /* 代码文字颜色 */
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -27,7 +27,7 @@
             padding: 0;
             color: var(--text-color);
             display: flex;
-            background-color: #ffffff;          /* 纯白背景 */
+            background-color: #ffffff; /* 纯白背景 */
         }
 
         /* 侧边栏样式 */
@@ -48,7 +48,7 @@
             padding: 30px 20px;
             background: rgba(255, 255, 255, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 0;  /* 移除外边距 */
+            margin: 0; /* 移除外边距 */
         }
 
         .sidebar-header img {
@@ -144,9 +144,15 @@
 
         /* 添加动画效果 */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .nav-links li:nth-child(2n) {
@@ -198,9 +204,15 @@
 
         /* 添加霓虹灯效果 */
         @keyframes glow {
-            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-            100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            0% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
         }
 
         /* 主要内容区域样式 */
@@ -239,7 +251,7 @@
         .project-banner img {
             max-width: 500px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
 
@@ -381,7 +393,7 @@
             .sidebar {
                 transform: translateX(-100%);
             }
-            
+
             .main-content {
                 margin-left: 0;
                 width: 100%;
@@ -734,96 +746,296 @@
         }
 
         @keyframes octocat-wave {
-            0%, 100% { transform: rotate(0); }
-            20%, 60% { transform: rotate(-25deg); }
-            40%, 80% { transform: rotate(10deg); }
+            0%, 100% {
+                transform: rotate(0);
+            }
+            20%, 60% {
+                transform: rotate(-25deg);
+            }
+            40%, 80% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .sentence-showcase {
+            background: linear-gradient(135deg, #fff5f7 0%, #fdf2f8 100%);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            max-width: 1000px;
+        }
+
+        .sentence-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #randomSentence {
+            font-size: 32px;
+            line-height: 1.8;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 30px 0;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ec4899, #db2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textShine {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .quote-marks {
+            font-size: 150px;
+            color: rgba(236, 72, 153, 0.1);
+            position: absolute;
+            top: -80px;
+            left: -40px;
+            font-family: "Times New Roman", serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .tags {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+        }
+
+        .tag:hover {
+            background: rgba(236, 72, 153, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+        }
+
+        .refresh-btn {
+            margin-top: 40px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ec4899, #db2777);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .refresh-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+            background: linear-gradient(45deg, #db2777, #ec4899);
+        }
+
+        .refresh-btn:disabled {
+            background: linear-gradient(45deg, #ccc, #999);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .refresh-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            width: 0%;
+            transition: width 10s linear;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .sentence-showcase::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ec4899, #db2777, #ec4899);
+            z-index: -1;
+            border-radius: 22px;
+            background-size: 200% 200%;
+            animation: borderGlow 3s ease-in-out infinite;
+            filter: blur(10px);
+            opacity: 0.5;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #randomSentence::after {
+            content: '|';
+            animation: cursor 1s infinite;
+            font-weight: 300;
+            color: #ec4899;
+            text-shadow: none;
+            -webkit-text-fill-color: #ec4899;
+        }
+
+        @keyframes cursor {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 在 body 标签开始处添加 GitHub 角标 -->
-    <a href="https://github.com/Dddddduo/balloonWords" class="github-corner" target="_blank" aria-label="View source on GitHub">
-        <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
-            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm"></path>
-            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-        </svg>
-    </a>
+<!-- 在 body 标签开始处添加 GitHub 角标 -->
+<a href="https://github.com/Dddddduo/balloonWords" class="github-corner" target="_blank"
+   aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
 
-    <!-- 侧边导航栏 -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="https://ooo.0x0.ooo/2025/02/14/OGQ8z6.jpg" alt="Logo">
-            <h2>BallonWords</h2>
-            <h2>By Dduo</h2>
+<!-- 侧边导航栏 -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>BallonWords</h2>
+        <h2>By Dduo</h2>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#project-intro">📝 项目介绍</a></li>
+        <li><a href="#quick-start">🚀 快速开始</a></li>
+        <li><a href="#tech-stack">🛠️ 技术栈</a></li>
+        <li><a href="#progress">✅ 后期展望</a></li>
+        <li><a href="#updates">🌱 最新动态</a></li>
+        <li><a href="#highlights">✨ 项目亮点</a></li>
+        <li><a href="#api-endpoints">📚 API 接口</a>
+            <ul>
+                <li><a href="#get-random">随机获取句子</a></li>
+                <li><a href="#get-all">获取所有句子</a></li>
+                <li><a href="#get-tags">获取所有标签</a></li>
+                <li><a href="#get-by-tags">根据标签获取句子</a></li>
+                <li><a href="#get-all-by-tags">根据标签获取所有句子</a></li>
+            </ul>
+        </li>
+        <li><a href="#developers">👥 开发人员</a></li>
+    </ul>
+</div>
+
+<!-- 主要内容区域 -->
+<div class="main-content">
+    <!-- 修改句子展示区域的HTML结构 -->
+    <div class="sentence-showcase">
+        <div class="sentence-content">
+            <div class="quote-marks">"</div>
+            <p id="randomSentence">加载中...</p>
+            <div class="tags" id="sentenceTags"></div>
+            <button id="refreshButton" class="refresh-btn">
+                <span class="refresh-text">换一句</span>
+                <div class="refresh-progress"></div>
+            </button>
         </div>
-        <ul class="nav-links">
-            <li><a href="#project-intro">📝 项目介绍</a></li>
-            <li><a href="#quick-start">🚀 快速开始</a></li>
-            <li><a href="#tech-stack">🛠️ 技术栈</a></li>
-            <li><a href="#progress">✅ 后期展望</a></li>
-            <li><a href="#updates">🌱 最新动态</a></li>
-            <li><a href="#highlights">✨ 项目亮点</a></li>
-            <li><a href="#api-endpoints">📚 API 接口</a>
-                <ul>
-                    <li><a href="#get-random">随机获取句子</a></li>
-                    <li><a href="#get-all">获取所有句子</a></li>
-                    <li><a href="#get-tags">获取所有标签</a></li>
-                    <li><a href="#get-by-tags">根据标签获取句子</a></li>
-                    <li><a href="#get-all-by-tags">根据标签获取所有句子</a></li>
-                </ul>
-            </li>
-            <li><a href="#developers">👥 开发人员</a></li>
-        </ul>
     </div>
 
-    <!-- 主要内容区域 -->
-    <div class="main-content">
-        <div id="project-intro" class="project-intro">
-            <h1>🎈 BallonWords 让文字如气球般自由漂浮，飞向字节的无限云端</h1>
-            
-            <div class="project-banner">
-                <img src="https://ooo.0x0.ooo/2025/02/14/OGQ8z6.jpg" alt="BallonWords Banner">
-                <p>✨ 项目灵感: 每个词句都是幸运兔手中的气球 ✨</p>
-            </div>
+    <div id="project-intro" class="project-intro">
+        <h1 align="center">🎈BallonWords🎈</h1>
+        <h1 align="center">🎈让文字如气球般自由漂浮，飞向字节的无限云端🎈</h1>
 
-            <p>BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注入生命力。通过动态气球特效，我们将每一句打动人心的文字承载在气球上，让经典台词、网络金句、文学摘录等灵感以趣味化的方式漂浮于数字世界。</p>
+        <div class="project-banner">
+            <img src="https://ooo.0x0.ooo/2025/02/14/OGQ8z6.jpg" alt="BallonWords Banner">
+            <p>✨ 项目灵感: 每个词句都是幸运兔手中的气球 ✨</p>
         </div>
 
-        <div id="quick-start" class="section">
-            <h2>🚀 快速开始</h2>
-            
-            <div class="quick-start-grid">
-                <div class="quick-start-item">
-                    <h3>📥 获取项目</h3>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>HTTPS</span>
-                            <button class="copy-btn" onclick="copyToClipboard('git clone https://github.com/Dddddduo/balloonWords.git')">复制</button>
-                        </div>
-                        <pre><code>git clone https://github.com/Dddddduo/balloonWords.git</code></pre>
+<!--        <p>BallonWords-->
+<!--            是一个轻量级中文语句灵感平台，-->
+<!--            致力于为文字注入生命力。、-->
+<!--            我们将每一句打动人心的文字承载在气球上，-->
+<!--            让经典台词、网络金句、文学摘录等灵感以趣味化的方式漂浮于数字世界。-->
+<!--            以数字气球为媒介，通过漂浮轨迹、膨胀收缩等动态效果，将经典台词、网络热梗、文学金句等文字内容转化为可交互的视觉符号。例如用户可选择「渐变色气球」承载抒情诗句，或「闪烁霓虹气球」呈现幽默段子。-->
+<!--            平台内置分场景语料库（如#情感共鸣 #哲思启迪 #生活趣味），支持用户通过标签筛选、语义检索快速获取灵感。参考智能设备开发思路3，提供「一键换肤」功能，允许自定义气球形状、动态效果与背景空间。</p>-->
+    </div>
+
+    <div id="quick-start" class="section">
+        <h2>🚀 快速开始</h2>
+
+        <div class="quick-start-grid">
+            <div class="quick-start-item">
+                <h3>📥 获取项目</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTTPS</span>
+                        <button class="copy-btn"
+                                onclick="copyToClipboard('git clone https://github.com/Dddddduo/balloonWords.git')">复制
+                        </button>
                     </div>
+                    <pre><code>git clone https://github.com/Dddddduo/balloonWords.git</code></pre>
                 </div>
+            </div>
 
-                <div class="quick-start-item">
-                    <h3>⚙️ 环境要求</h3>
-                    <ul class="requirement-list">
-                        <li>JDK 17+</li>
-                        <li>Maven 3.8+</li>
-                        <li>MySQL 8.0+</li>
-                        <li>Redis 6.0+</li>
-                        <li>RabbitMQ 3.14+</li>
-                        <li>Elasticsearch 8.15+</li>
-                    </ul>
-                </div>
+            <div class="quick-start-item">
+                <h3>⚙️ 环境要求</h3>
+                <ul class="requirement-list">
+                    <li>JDK 17+</li>
+                    <li>Maven 3.8+</li>
+                    <li>MySQL 8.0+</li>
+                    <li>Redis 6.0+</li>
+                    <li>RabbitMQ 3.14+</li>
+                    <li>Elasticsearch 8.15+</li>
+                </ul>
+            </div>
 
-                <div class="quick-start-item">
-                    <h3>🔧 配置中间件</h3>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>application-prod.yml</span>
-                        </div>
-                        <pre><code>spring:
+            <div class="quick-start-item">
+                <h3>🔧 配置中间件</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>application-prod.yml</span>
+                    </div>
+                    <pre><code>spring:
   # mysql配置
   datasource:
     url: jdbc:mysql://localhost:3306/balloon_words
@@ -866,138 +1078,138 @@
       uris: localhost:9200
       username: elastic
       password: 123456</code></pre>
+                </div>
+            </div>
+
+            <div class="quick-start-item">
+                <h3>▶️ 启动项目</h3>
+                <div class="step-list">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>进入项目目录</p>
+                        <pre><code>cd balloonWords</code></pre>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>编译项目</p>
+                        <pre><code>mvn clean package -DskipTests</code></pre>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p>运行项目</p>
+                        <pre><code>java -jar target/ans-0.0.1-SNAPSHOT.jar</code></pre>
                     </div>
                 </div>
-
-                <div class="quick-start-item">
-                    <h3>▶️ 启动项目</h3>
-                    <div class="step-list">
-                        <div class="step">
-                            <span class="step-number">1</span>
-                            <p>进入项目目录</p>
-                            <pre><code>cd balloonWords</code></pre>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">2</span>
-                            <p>编译项目</p>
-                            <pre><code>mvn clean package -DskipTests</code></pre>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">3</span>
-                            <p>运行项目</p>
-                            <pre><code>java -jar target/ans-0.0.1-SNAPSHOT.jar</code></pre>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
 
-        <div id="tech-stack" class="tech-stack">
-            <div class="tech-item">
-                <h4>Java 17</h4>
-                <p>核心开发语言</p>
-            </div>
-            <div class="tech-item">
-                <h4>Spring Boot 3.0.2</h4>
-                <p>应用框架</p>
-            </div>
-            <div class="tech-item">
-                <h4>MySQL</h4>
-                <p>数据存储</p>
-            </div>
-            <div class="tech-item">
-                <h4>Redis</h4>
-                <p>缓存系统</p>
-            </div>
-            <div class="tech-item">
-                <h4>MyBatis</h4>
-                <p>ORM框架</p>
-            </div>
-            <div class="tech-item">
-                <h4>Knife4j</h4>
-                <p>接口文档</p>
-            </div>
-            <div class="tech-item">
-                <h4>RabbitMQ</h4>
-                <p>消息队列</p>
-            </div>
-            <div class="tech-item">
-                <h4>JUnit5+Mockito</h4>
-                <p>单元测试</p>
-            </div>
-            <div class="tech-item">
-                <h4>Transactional</h4>
-                <p>事务管理</p>
-            </div>
-            <div class="tech-item">
-                <h4>配置Elasticsearch</h4>
-                <p>搜索引擎</p>
+    <div id="tech-stack" class="tech-stack">
+        <div class="tech-item">
+            <h4>Java 17</h4>
+            <p>核心开发语言</p>
+        </div>
+        <div class="tech-item">
+            <h4>Spring Boot 3.0.2</h4>
+            <p>应用框架</p>
+        </div>
+        <div class="tech-item">
+            <h4>MySQL</h4>
+            <p>数据存储</p>
+        </div>
+        <div class="tech-item">
+            <h4>Redis</h4>
+            <p>缓存系统</p>
+        </div>
+        <div class="tech-item">
+            <h4>MyBatis</h4>
+            <p>ORM框架</p>
+        </div>
+        <div class="tech-item">
+            <h4>Knife4j</h4>
+            <p>接口文档</p>
+        </div>
+        <div class="tech-item">
+            <h4>RabbitMQ</h4>
+            <p>消息队列</p>
+        </div>
+        <div class="tech-item">
+            <h4>JUnit5+Mockito</h4>
+            <p>单元测试</p>
+        </div>
+        <div class="tech-item">
+            <h4>Transactional</h4>
+            <p>事务管理</p>
+        </div>
+        <div class="tech-item">
+            <h4>配置Elasticsearch</h4>
+            <p>搜索引擎</p>
+        </div>
+    </div>
+
+    <div id="progress" class="progress-section">
+        <h2>✅ 后期展望</h2>
+        <div class="progress-item">
+            <span>引入Elasticsearch</span>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
             </div>
         </div>
-
-        <div id="progress" class="progress-section">
-            <h2>✅ 后期展望</h2>
-            <div class="progress-item">
-                <span>引入Elasticsearch</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%"></div>
-                </div>
-            </div>
-            <div class="progress-item">
-                <span>使用cannel实时检测mysql</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%"></div>
-                </div>
-            </div>
-            <div class="progress-item">
-                <span>github自动化部署</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%"></div>
-                </div>
+        <div class="progress-item">
+            <span>使用cannel实时检测mysql</span>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
             </div>
         </div>
-
-        <div id="updates" class="latest-updates">
-            <h2>🌱 开发动态</h2>
-            <div class="update-item">
-                <div class="update-date">2024-02-22 ~ 2024-02-24</div>
-                <p>完成基础的五个接口</p>
-                <p>使用Junit5+MockMvc集成单元测试</p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">2024-02-10 ~ 2024-02-12</div>
-                <p>设计数据库表</p>
-                <p>多表联查实现第一个接口 /get</p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">2024-03-01 ~ 2024-03-05</div>
-                <p>消息队列使用</p>
-                <p>RabbitMQ解耦接口 用Spring事件监听器控制上下文同步 </p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">2024-03-05 ~ 2024-03-10</div>
-                <p>使用redis降低数据库压力</p>
-                <p>分布式锁套redissonClient防穿透防止缓存穿透</p>
-            </div>
-            <div class="update-item">
-                <div class="update-date">2024-03-10 ~ 2024-03-13</div>
-                <p>使用spring事务控制增添操作的原子性</p>
-                <p>Transactional注解控制超时管理 事务回滚</p>
+        <div class="progress-item">
+            <span>github自动化部署</span>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
             </div>
         </div>
+    </div>
 
-        <h2 id="api-endpoints">📚 API 接口文档</h2>
+    <div id="updates" class="latest-updates">
+        <h2>🌱 开发动态</h2>
+        <div class="update-item">
+            <div class="update-date">2024-02-22 ~ 2024-02-24</div>
+            <p>完成基础的五个接口</p>
+            <p>使用Junit5+MockMvc集成单元测试</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-02-10 ~ 2024-02-12</div>
+            <p>设计数据库表</p>
+            <p>多表联查实现第一个接口 /get</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-01 ~ 2024-03-05</div>
+            <p>消息队列使用</p>
+            <p>RabbitMQ解耦接口 用Spring事件监听器控制上下文同步 </p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-05 ~ 2024-03-10</div>
+            <p>使用redis降低数据库压力</p>
+            <p>分布式锁套redissonClient防穿透防止缓存穿透</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-10 ~ 2024-03-13</div>
+            <p>使用spring事务控制增添操作的原子性</p>
+            <p>Transactional注解控制超时管理 事务回滚</p>
+        </div>
+    </div>
 
-        <div id="get-random" class="endpoint">
-            <span class="method">POST</span>
-            <span class="url">/sentence/get</span>
-            <div class="description">随机获取一条句子</div>
-            <div class="params">
-                <strong>请求参数：</strong> 无
-            </div>
-            <div class="response">
-                <strong>响应示例：</strong>
-                <pre>
+    <h2 id="api-endpoints">📚 API 接口文档</h2>
+
+    <div id="get-random" class="endpoint">
+        <span class="method">POST</span>
+        <span class="url">/sentence/get</span>
+        <div class="description">随机获取一条句子</div>
+        <div class="params">
+            <strong>请求参数：</strong> 无
+        </div>
+        <div class="response">
+            <strong>响应示例：</strong>
+            <pre>
 {
     "flag": true,
     "data": {
@@ -1006,19 +1218,19 @@
     }
 }
                 </pre>
-            </div>
         </div>
+    </div>
 
-        <div id="get-all" class="endpoint">
-            <span class="method">POST</span>
-            <span class="url">/sentence/get-all-words</span>
-            <div class="description">获取所有句子</div>
-            <div class="params">
-                <strong>请求参数：</strong> 无
-            </div>
-            <div class="response">
-                <strong>响应示例：</strong>
-                <pre>
+    <div id="get-all" class="endpoint">
+        <span class="method">POST</span>
+        <span class="url">/sentence/get-all-words</span>
+        <div class="description">获取所有句子</div>
+        <div class="params">
+            <strong>请求参数：</strong> 无
+        </div>
+        <div class="response">
+            <strong>响应示例：</strong>
+            <pre>
 {
     "flag": true,
     "data": [
@@ -1035,19 +1247,19 @@
     ]
 }
                 </pre>
-            </div>
         </div>
+    </div>
 
-        <div id="get-tags" class="endpoint">
-            <span class="method">POST</span>
-            <span class="url">/sentence/get-tags</span>
-            <div class="description">获取所有标签</div>
-            <div class="params">
-                <strong>请求参数：</strong> 无
-            </div>
-            <div class="response">
-                <strong>响应示例：</strong>
-                <pre>
+    <div id="get-tags" class="endpoint">
+        <span class="method">POST</span>
+        <span class="url">/sentence/get-tags</span>
+        <div class="description">获取所有标签</div>
+        <div class="params">
+            <strong>请求参数：</strong> 无
+        </div>
+        <div class="response">
+            <strong>响应示例：</strong>
+            <pre>
 {
     "flag": true,
     "data": [
@@ -1062,16 +1274,16 @@
     ]
 }
                 </pre>
-            </div>
         </div>
+    </div>
 
-        <div id="get-by-tags" class="endpoint">
-            <span class="method">POST</span>
-            <span class="url">/sentence/get-by-tags</span>
-            <div class="description">根据标签获取句子</div>
-            <div class="params">
-                <strong>请求参数：</strong>
-                <pre>
+    <div id="get-by-tags" class="endpoint">
+        <span class="method">POST</span>
+        <span class="url">/sentence/get-by-tags</span>
+        <div class="description">根据标签获取句子</div>
+        <div class="params">
+            <strong>请求参数：</strong>
+            <pre>
 [
     {
         "tagId": "1001",
@@ -1083,10 +1295,10 @@
     }
 ]
                 </pre>
-            </div>
-            <div class="response">
-                <strong>响应示例：</strong>
-                <pre>
+        </div>
+        <div class="response">
+            <strong>响应示例：</strong>
+            <pre>
 {
     "flag": true,
     "data": {
@@ -1095,16 +1307,16 @@
     }
 }
                 </pre>
-            </div>
         </div>
+    </div>
 
-        <div id="get-all-by-tags" class="endpoint">
-            <span class="method">POST</span>
-            <span class="url">/sentence/get-all-by-tags</span>
-            <div class="description">根据标签获取所有匹配的句子</div>
-            <div class="params">
-                <strong>请求参数：</strong>
-                <pre>
+    <div id="get-all-by-tags" class="endpoint">
+        <span class="method">POST</span>
+        <span class="url">/sentence/get-all-by-tags</span>
+        <div class="description">根据标签获取所有匹配的句子</div>
+        <div class="params">
+            <strong>请求参数：</strong>
+            <pre>
 [
     {
         "tagId": "1001",
@@ -1116,10 +1328,10 @@
     }
 ]
                 </pre>
-            </div>
-            <div class="response">
-                <strong>响应示例：</strong>
-                <pre>
+        </div>
+        <div class="response">
+            <strong>响应示例：</strong>
+            <pre>
 {
     "flag": true,
     "data": [
@@ -1136,125 +1348,213 @@
     ]
 }
                 </pre>
-            </div>
         </div>
+    </div>
 
-        <!-- 添加项目亮点部分 -->
-        <div id="highlights" class="section">
-            <h2>✨ 项目亮点</h2>
-            <div class="highlights-grid">
-                <div class="highlight-item">
-                    <h3>🧪 完善的测试覆盖</h3>
-                    <ul>
-                        <li>使用 JUnit 5 进行单元测试</li>
-                        <li>MockMvc 模拟 HTTP 请求</li>
-                        <li>Mockito 实现依赖注入模拟</li>
-                        <li>测试覆盖率 > 80%</li>
-                    </ul>
-                </div>
-                <div class="highlight-item">
-                    <h3>📦 模块化设计</h3>
-                    <ul>
-                        <li>清晰的分层架构</li>
-                        <li>统一的异常处理</li>
-                        <li>规范的接口文档</li>
-                        <li>可扩展的标签系统</li>
-                    </ul>
-                </div>
-                <div class="highlight-item">
-                    <h3>🛠️ 开发规范</h3>
-                    <ul>
-                        <li>遵循 Angular 提交规范</li>
-                        <li>代码风格检查</li>
-                        <li>持续集成/部署</li>
-                        <li>自动化测试流程</li>
-                    </ul>
-                </div>
+    <!-- 添加项目亮点部分 -->
+    <div id="highlights" class="section">
+        <h2>✨ 项目亮点</h2>
+        <div class="highlights-grid">
+            <div class="highlight-item">
+                <h3>🧪 完善的测试覆盖</h3>
+                <ul>
+                    <li>使用 JUnit 5 进行单元测试</li>
+                    <li>MockMvc 模拟 HTTP 请求</li>
+                    <li>Mockito 实现依赖注入模拟</li>
+                    <li>测试覆盖率 > 80%</li>
+                </ul>
             </div>
-        </div>
-
-        <!-- 添加开发人员模块 -->
-        <div id="developers" class="section developers-section">
-            <h2>👥 开发人员</h2>
-            
-            <!-- 添加感谢语 -->
-            <div class="gratitude">
-                <p>感谢所有为 BallonWords 项目做出贡献的开发者们！正是因为你们的参与，才让这个项目不断成长。</p>
+            <div class="highlight-item">
+                <h3>📦 模块化设计</h3>
+                <ul>
+                    <li>清晰的分层架构</li>
+                    <li>统一的异常处理</li>
+                    <li>规范的接口文档</li>
+                    <li>可扩展的标签系统</li>
+                </ul>
             </div>
-            
-            <div class="developers-grid">
-                <div class="developer-card">
-                    <img src="https://avatars.githubusercontent.com/u/164348579?v=4" alt="Dduo">
-                    <div class="developer-info">
-                        <h3>Dduo</h3>
-                        <p class="role">项目负责人 / 后端开发</p>
-                        <div class="social-links">
-                            <a href="https://github.com/Dddddduo" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="developer-card">
-                    <img src="https://avatars.githubusercontent.com/u/151519832?v=4" alt="luoqwe123">
-                    <div class="developer-info">
-                        <h3>luoqwe123</h3>
-                        <p class="role">前端开发 / API文档的开发</p>
-                        <div class="social-links">
-                            <a href="https://github.com/luoqwe123" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="developer-card">
-                    <img src="https://avatars.githubusercontent.com/u/188179474?v=4" alt="yapi0420">
-                    <div class="developer-info">
-                        <h3>yapi0420</h3>
-                        <p class="role">测试 / 文档书写</p>
-                        <div class="social-links">
-                            <a href="https://github.com/yapi0420" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="developer-card">
-                    <img src="https://avatars.githubusercontent.com/u/176784073?v=4" alt="666mch">
-                    <div class="developer-info">
-                        <h3>666mch</h3>
-                        <p class="role">测试 / 文档书写</p>
-                        <div class="social-links">
-                            <a href="https://github.com/666mch" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 添加开源贡献邀请 -->
-            <div class="contribution-invite">
-                <h3>🤝 欢迎参与贡献</h3>
-                <p>BallonWords 是一个开源项目，我们非常欢迎更多的开发者参与进来！</p>
-                <div class="contribution-steps">
-                    <p>如何参与：</p>
-                    <ol>
-                        <li>在 GitHub 上 Fork 本项目</li>
-                        <li>创建您的特性分支 (git checkout -b feature/AmazingFeature)</li>
-                        <li>提交您的更改 (git commit -m 'Add some AmazingFeature')</li>
-                        <li>推送到分支 (git push origin feature/AmazingFeature)</li>
-                        <li>创建一个 Pull Request</li>
-                    </ol>
-                </div>
+            <div class="highlight-item">
+                <h3>🛠️ 开发规范</h3>
+                <ul>
+                    <li>遵循 Angular 提交规范</li>
+                    <li>代码风格检查</li>
+                    <li>持续集成/部署</li>
+                    <li>自动化测试流程</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('复制成功！');
-            }).catch(err => {
-                console.error('复制失败:', err);
-            });
+    <!-- 添加开发人员模块 -->
+    <div id="developers" class="section developers-section">
+        <h2>👥 开发人员</h2>
+
+        <!-- 添加感谢语 -->
+        <div class="gratitude">
+            <p>感谢所有为 BallonWords 项目做出贡献的开发者们！正是因为你们的参与，才让这个项目不断成长。</p>
+        </div>
+
+        <div class="developers-grid">
+            <div class="developer-card">
+                <img src="https://avatars.githubusercontent.com/u/164348579?v=4" alt="Dduo">
+                <div class="developer-info">
+                    <h3>Dduo</h3>
+                    <p class="role">项目负责人 / 后端开发</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Dddddduo" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="developer-card">
+                <img src="https://avatars.githubusercontent.com/u/151519832?v=4" alt="luoqwe123">
+                <div class="developer-info">
+                    <h3>luoqwe123</h3>
+                    <p class="role">前端开发 / API文档的开发</p>
+                    <div class="social-links">
+                        <a href="https://github.com/luoqwe123" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="developer-card">
+                <img src="https://avatars.githubusercontent.com/u/188179474?v=4" alt="yapi0420">
+                <div class="developer-info">
+                    <h3>yapi0420</h3>
+                    <p class="role">测试 / 文档书写</p>
+                    <div class="social-links">
+                        <a href="https://github.com/yapi0420" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="developer-card">
+                <img src="https://avatars.githubusercontent.com/u/176784073?v=4" alt="666mch">
+                <div class="developer-info">
+                    <h3>666mch</h3>
+                    <p class="role">测试 / 文档书写</p>
+                    <div class="social-links">
+                        <a href="https://github.com/666mch" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 添加开源贡献邀请 -->
+        <div class="contribution-invite">
+            <h3>🤝 欢迎参与贡献</h3>
+            <p>BallonWords 是一个开源项目，我们非常欢迎更多的开发者参与进来！</p>
+            <div class="contribution-steps">
+                <p>如何参与：</p>
+                <ol>
+                    <li>在 GitHub 上 Fork 本项目</li>
+                    <li>创建您的特性分支 (git checkout -b feature/AmazingFeature)</li>
+                    <li>提交您的更改 (git commit -m 'Add some AmazingFeature')</li>
+                    <li>推送到分支 (git push origin feature/AmazingFeature)</li>
+                    <li>创建一个 Pull Request</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('复制成功！');
+        }).catch(err => {
+            console.error('复制失败:', err);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchRandomSentence);
+
+    let isTyping = false;
+    let canRefresh = true;
+    const refreshButton = document.getElementById('refreshButton');
+
+    function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        isTyping = true;
+        element.textContent = '';
+
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                isTyping = false;
+            }
         }
-    </script>
+
+        type();
+    }
+
+    function startCooldown() {
+        canRefresh = false;
+        refreshButton.disabled = true;
+
+        const progressBar = refreshButton.querySelector('.refresh-progress');
+        progressBar.style.width = '0%';
+        progressBar.offsetHeight;
+        progressBar.style.width = '100%';
+
+        setTimeout(() => {
+            canRefresh = true;
+            refreshButton.disabled = false;
+            progressBar.style.width = '0%';
+        }, 10000);
+    }
+
+    function fetchRandomSentence() {
+        if (!canRefresh || isTyping) return;
+
+        startCooldown();
+
+        fetch('http://127.0.0.1:8080/sentence/get')
+            .then(response => response.json())
+            .then(data => {
+                if (data.flag && data.data) {
+                    typeWriter(document.getElementById('randomSentence'), data.data.content, 50);
+
+                    const tagsContainer = document.getElementById('sentenceTags');
+                    tagsContainer.innerHTML = '';
+
+                    data.data.tagName.forEach(tag => {
+                        const tagElement = document.createElement('span');
+                        tagElement.className = 'tag';
+                        tagElement.textContent = tag;
+                        tagsContainer.appendChild(tagElement);
+                    });
+
+                    tagsContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        tagsContainer.style.opacity = '1';
+                    }, 100);
+                }
+            })
+            .catch(error => {
+                console.error('获取句子失败:', error);
+                document.getElementById('randomSentence').textContent = '暂时无法获取句子，请稍后再试...';
+            });
+    }
+
+    refreshButton.addEventListener('click', fetchRandomSentence);
+
+    document.addEventListener('keydown', function (event) {
+        if (event.code === 'Space' && canRefresh && !isTyping) {
+            event.preventDefault();
+            fetchRandomSentence();
+        }
+    });
+
+    setInterval(() => {
+        if (canRefresh && !isTyping) {
+            fetchRandomSentence();
+        }
+    }, 10000);
+</script>
 </body>
 </html> 

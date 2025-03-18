@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import work.dduo.ans.annotation.VisitLogger;
 import work.dduo.ans.model.Result;
 import work.dduo.ans.model.dto.AddSentenceDTO;
@@ -67,7 +64,7 @@ public class WordsController {
      * @return GetRespVO
      */
     @ApiOperation(value = "随机获取一条句子")
-    @PostMapping("/get")
+    @GetMapping("/get")
     @VisitLogger(value = "随机获取一条句子")
 //    public Result<?> getWord() {
 //        GetRespVO getRespVO = tSentencesService.get();
