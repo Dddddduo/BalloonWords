@@ -178,10 +178,35 @@
         </dependency>
 
         <!--  elasticsearch  -->
+        <!-- ElasticSearch -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>elasticsearch-java</artifactId>
+                    <groupId>co.elastic.clients</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>8.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jakarta.json-api</artifactId>
+                    <groupId>jakarta.json</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
 
     </dependencies>
     <dependencyManagement>
@@ -214,7 +239,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>work.dduo.ans.AnsApplication</mainClass>
-                    <skip>true</skip>
+<!--                    <skip>true</skip>-->
                 </configuration>
                 <executions>
                     <execution>

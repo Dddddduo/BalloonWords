@@ -79,11 +79,12 @@ spring:
           max-attempts: 3
           enabled: true
           initial-interval: 1000
-  # 配置Elasticsearch
-#  elasticsearch:
-#    uris: 113.44.34.176:9200
-#    username: elastic
-#    password: 123456
+# 配置Elasticsearch
+elasticsearch:
+  port: 9200
+  ip: 113.44.34.176
+  username: elastic
+  password: 6XeDC-*gw=IpvPqpxg3n
 # 配置线程池
 thread:
   pool:
