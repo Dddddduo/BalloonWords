@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class AnsApplication {
 
+    // 项目启动入口
     public static void main(String[] args) {
         SpringApplication.run(AnsApplication.class, args);
     }
