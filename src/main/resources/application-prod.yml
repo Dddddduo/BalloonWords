@@ -1,7 +1,7 @@
 # 线上配置文件
 # 证书版
 server:
-  port: 443
+  port: 8400
   ssl:
     key-store-password: 2w736cdw    #填写jks-password.txt文件内的密码。
     key-store-type: JKS #JKS格式证书密钥库类型。PFX格式的证书密钥库类型为PKCS12。
