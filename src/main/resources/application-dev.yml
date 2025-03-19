@@ -1,7 +1,10 @@
 # 生产配置文件
 server:
-  port: 8080
-
+  port: 443
+  ssl:
+    key-store-password: 2w736cdw    #填写jks-password.txt文件内的密码。
+    key-store-type: JKS #JKS格式证书密钥库类型。PFX格式的证书密钥库类型为PKCS12。
+    key-store: classpath:gczdy.cn.jks   #您需要使用实际的证书名称替换domain_name.jks。
 # Spring的配置
 spring:
   # 配置MySQL
