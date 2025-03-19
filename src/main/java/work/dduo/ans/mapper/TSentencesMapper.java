@@ -45,6 +45,7 @@ public interface TSentencesMapper extends BaseMapper<TSentences> {
 
     int batchInsertTags(AddSentenceTagReq addSentenceTagReq);
 
+    void delete(Integer id);
 }
 
 

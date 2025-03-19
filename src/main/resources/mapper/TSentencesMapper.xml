@@ -62,6 +62,11 @@
         </foreach>
     </update>
 
+    <!-- 删除一条句子  -->
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM t_sentences
+        WHERE id = #{id}
+    </delete>
 
     <!--    todo 改掉join关键字的查询方法-->
     <select id="get" resultType="work.dduo.ans.model.vo.response.GetResp">

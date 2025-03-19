@@ -6,6 +6,7 @@ import work.dduo.ans.domain.TSentences;
 import com.baomidou.mybatisplus.extension.service.IService;
 import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddTagsReq;
+import work.dduo.ans.model.vo.request.DeleteSentenceReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
@@ -34,4 +35,6 @@ public interface TSentencesService extends IService<TSentences> {
     void addSentenceWithTags(AddSentenceDTO addSentenceDTO) throws Exception;
 
     void getAllUpdateCache();
+
+    void deleteSentence(DeleteSentenceReq deleteSentenceReq);
 }

@@ -11,6 +11,7 @@ import work.dduo.ans.annotation.VisitLogger;
 import work.dduo.ans.model.Result;
 import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddTagsReq;
+import work.dduo.ans.model.vo.request.DeleteSentenceReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
@@ -130,8 +131,7 @@ public class WordsController {
 
     /**
      * 添加一条句子
-     * 正文 标签集合 作者
-     *
+     * @param addSentenceDTO 正文 标签集合 作者
      * @return boolean
      */
     @ApiOperation(value = "添加一条句子")
@@ -141,5 +141,44 @@ public class WordsController {
         tSentencesService.addSentenceWithTags(addSentenceDTO);
         return Result.success();
     }
+
+    /**
+     * 编辑句子标签
+     * @return boolean
+     * todo
+     */
+    @ApiOperation(value = "编辑句子标签")
+    @PostMapping("/editTags")
+    @VisitLogger(value = "编辑句子标签")
+    public Result<?> editTags() throws Exception {
+
+        return Result.success();
+    }
+
+    /**
+     * 删除句子
+     * @return boolean
+     */
+    @ApiOperation(value = "删除句子")
+    @PostMapping("/delete")
+    @VisitLogger(value = "删除句子")
+    public Result<?> delete(@RequestBody DeleteSentenceReq deleteSentenceReq) throws Exception {
+        tSentencesService.deleteSentence(deleteSentenceReq);
+        return Result.success();
+    }
+
+    /**
+     * 搜索句子
+     * @return boolean
+     * todo
+     */
+    @ApiOperation(value = "添加一条句子")
+    @PostMapping("/search")
+    @VisitLogger(value = "添加一条句子")
+    public Result<?> search() throws Exception {
+        return Result.success();
+    }
+
+
 
 }
