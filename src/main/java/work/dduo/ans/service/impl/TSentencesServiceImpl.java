@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -17,6 +18,7 @@ import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddSentenceReq;
 import work.dduo.ans.model.vo.request.AddSentenceTagReq;
 import work.dduo.ans.model.vo.request.AddTagsReq;
+import work.dduo.ans.model.vo.request.DeleteSentenceReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetResp;
@@ -302,6 +304,8 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
             lock.lock();
             // 版本校验（防止旧版本覆盖）
             List<GetAllResp> newData = tSentencesMapper.getAll();
+            // 删除缓存
+            redisService.deleteObject(cacheKey);
             // 随机化TTL防雪崩 随机化过期时间
             redisService.setList(cacheKey, newData, RandomUtil.randomInt(30, 60), TimeUnit.MINUTES);
         } finally {
@@ -316,7 +320,22 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     public void getAllUpdateCache() {
         String cacheKey = "balloonSentences:all" + DATA_VERSION;
         List<GetAllResp> dbData = tSentencesMapper.getAll();
+        // 删除缓存
+        redisService.deleteObject(cacheKey);
+        // 更新缓存
         redisService.setList(cacheKey, dbData, RandomUtil.randomInt(30, 60), TimeUnit.MINUTES);
+    }
+
+    /**
+     * 删除句子
+     */
+    @Override
+    public void deleteSentence(DeleteSentenceReq deleteSentenceReq) {
+        Integer id = deleteSentenceReq.getId();
+        tSentencesMapper.delete(id);
+        DATA_VERSION.incrementAndGet(); // 版本号自增
+        String cacheKey = "balloonSentences:all" + DATA_VERSION;
+        delayDoubleDelete(cacheKey, 5, TimeUnit.SECONDS); // 执行延时双删
     }
 
 }

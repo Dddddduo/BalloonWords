@@ -45,7 +45,7 @@ public class RabbitMQConnectionTest {
     // 进行消息积压测试
     public void testRabbitMQSendAlways() throws InterruptedException {
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000000000; i++) {
                 String testMessage = "Test message at " + new Date();
                 rabbitMqService.sendDirect("balloonWords.routingKey", testMessage);
                 System.out.println("发送消息成功！"+"第"+i+"次");
