@@ -77,6 +77,16 @@ public class RabbitMQConnectionTest {
             e.printStackTrace();
         }
     }
+    @Test
+    // 接收指定队列中的下一条消息 带ack确认返回
+    public void testRabbitMQReceiveWithAck() throws InterruptedException{
+        try{
+            String message =  rabbitMqService.receiveMessageWithAck("balloonWords.queue", 1000);
+            System.out.println(message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Test
     // 查看指定队列的消息数量

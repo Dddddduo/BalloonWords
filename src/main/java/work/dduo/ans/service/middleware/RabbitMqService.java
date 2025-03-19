@@ -1,6 +1,8 @@
 package work.dduo.ans.service.middleware;
 
 import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.GetResponse;
 import com.rabbitmq.client.MessageProperties;
 import org.springframework.amqp.core.Message;
 
@@ -8,6 +10,8 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
 
 
 @Service
@@ -53,6 +57,24 @@ public class RabbitMqService {
     public String receiveMessage(String queueName, long timeoutMillis) {
         Message message = rabbitTemplate.receive(queueName, timeoutMillis);
         return message != null ? new String(message.getBody()) : null;
+    }
+
+    /**
+     * 接收指定队列中的下一条消息 带ack确认返回
+     * @param queueName 队列名称
+     * @param timeoutMillis 超时时间（毫秒）
+     * @return 接收到的消息，超时返回null
+     * 示例：receiveMessage("order.queue", 5000)
+     */
+    public String receiveMessageWithAck(String queueName, long timeoutMillis) throws Exception {
+        Channel channel = rabbitTemplate.getConnectionFactory().createConnection().createChannel(false);
+        GetResponse response = channel.basicGet(queueName,  false); // 关闭自动ACK
+        if (response != null) {
+            String body = new String(response.getBody(),  StandardCharsets.UTF_8);
+            channel.basicAck(response.getEnvelope().getDeliveryTag(),  false);
+            return body;
+        }
+        return null;
     }
 
     /**
