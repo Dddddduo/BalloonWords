@@ -73,7 +73,7 @@ spring:
 #   监听器设置 死信队列配置 (如果需要延迟队列)
     listener:
       simple:
-        acknowledge-mode: manual  #消息确认方式
+        acknowledge-mode: manual    # 消息确认方式 接收消息后自动确认
         concurrency: 5            # 最小消费者数
         max-concurrency: 20       # 最大消费者数
         prefetch: 50              # 每个消费者最大未确认消息数

@@ -63,9 +63,6 @@ public class WordsController {
      *
      * @return GetRespVO
      */
-    @ApiOperation(value = "随机获取一条句子")
-    @GetMapping("/get")
-    @VisitLogger(value = "随机获取一条句子")
 //    public Result<?> getWord() {
 //        GetRespVO getRespVO = tSentencesService.get();
 //        if(getRespVO!=null){
@@ -74,6 +71,9 @@ public class WordsController {
 //            return Result.fail("null");
 //        }
 //    }
+    @ApiOperation(value = "随机获取一条句子")
+    @GetMapping("/get")
+    @VisitLogger(value = "随机获取一条句子")
     // 消息队列解耦解耦
     public Result<?> getWord() throws JsonProcessingException {
         // 发起请求
@@ -101,7 +101,6 @@ public class WordsController {
         // 释放锁，允许 Controller 层返回数据
         latch.countDown();
     }
-
 
     /**
      * 根据标签获取所有句子
