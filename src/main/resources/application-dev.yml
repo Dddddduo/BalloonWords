@@ -7,6 +7,9 @@ server:
     key-store: classpath:gczdy.cn.jks   #您需要使用实际的证书名称替换domain_name.jks。
 # Spring的配置
 spring:
+  # 配置Elasticsearch
+  elasticsearch:
+    uris: http://113.44.34.176:9200
   # 配置MySQL
   datasource:
     url: jdbc:mysql://113.44.34.176:3306/dduo_yiyan_db?useSSL=false&serverTimezone=UTC
@@ -82,12 +85,6 @@ spring:
           max-attempts: 3
           enabled: true
           initial-interval: 1000
-# 配置Elasticsearch
-elasticsearch:
-  port: 9200
-  ip: 113.44.34.176
-  username: elastic
-  password: 6XeDC-*gw=IpvPqpxg3n
 # 配置线程池
 thread:
   pool:
