@@ -8,12 +8,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import work.dduo.ans.elasticsearch.repository.GetAllRespRepository;
 import work.dduo.ans.model.vo.response.GetAllContentResp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,14 +30,13 @@ public class ElasticsearchService {
     private GetAllRespRepository getAllRespRepository;
 
     /**
-     * 保存数据库数据到elasticsearch
+     * 更新数据到elasticsearch
      *
      * @param getAllResp
      * @return
      */
     public List<GetAllContentResp> saveProduct(List<GetAllContentResp> getAllResp) {
-//        这只是写单个数据
-//        return (List<GetAllResp>) getAllRespRepository.save(getAllResp);
+        //  把传入的数据 存入elasticsearch
         return (List<GetAllContentResp>) getAllRespRepository.saveAll(getAllResp);
     }
 

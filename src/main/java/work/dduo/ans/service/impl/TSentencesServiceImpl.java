@@ -103,7 +103,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         String tags = getResp.getTags();
         String tagId = getResp.getTagId();
         // 防止NPE
-        if(!StrUtil.isEmpty(tags)&&!StrUtil.isEmpty(tagId)){
+        if (!StrUtil.isEmpty(tags) && !StrUtil.isEmpty(tagId)) {
             // 句子的hot字段和标签的hot字段++
             tSentencesMapper.setTS_hot(getResp.getId());
             List<Long> tagList = Arrays.stream(tagId.split(","))
@@ -130,7 +130,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     /**
      * 返回所有句子
      *
-     * @return  List<GetAllContentResp>
+     * @return List<GetAllContentResp>
      */
 //    @Override
 //    public List<GetAllResp>  getAll() {
@@ -150,25 +150,28 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
                 if (cachedData.isEmpty()) { // 空值缓存处理
                     return Collections.emptyList();
                 }
+                elasticsearchService.saveProduct(cachedData);  // 写到elasticsearch里面去
                 return cachedData;
-            }
-            // 3. 分布式锁防穿透 同一时间只允许一个线程更新缓存
-            RLock lock = redissonClient.getLock("lock:" + cacheKey);
-            try {
-                lock.lock(5, TimeUnit.SECONDS);
-                // 二次检查
-                cachedData = redisService.getList(cacheKey, 0, -1);
-                if (cachedData != null) return cachedData;
-                // 4. 数据库查询
-                List<GetAllContentResp> dbData = tSentencesMapper.getAll();
-                // 5. 异步写缓存（保证数据库操作成功）
-                CompletableFuture.runAsync(() -> {
-                    // 随机化TTL防雪崩
-                    redisService.setList(cacheKey, dbData, RandomUtil.randomInt(30, 60), TimeUnit.MINUTES);
-                });
-                return dbData;
-            } finally {
-                lock.unlock();
+            } else {
+                // 3. 分布式锁防穿透 同一时间只允许一个线程更新缓存
+                RLock lock = redissonClient.getLock("lock:" + cacheKey);
+                try {
+                    lock.lock(5, TimeUnit.SECONDS);
+                    // 二次检查
+                    cachedData = redisService.getList(cacheKey, 0, -1);
+                    if (cachedData != null) return cachedData;
+                    // 4. 数据库查询
+                    List<GetAllContentResp> dbData = tSentencesMapper.getAll();
+                    // 5. 异步写缓存和elasticsearch（保证数据库操作成功）
+                    CompletableFuture.runAsync(() -> {
+                        // 随机化TTL防雪崩
+                        redisService.setList(cacheKey, dbData, RandomUtil.randomInt(30, 60), TimeUnit.MINUTES);
+                        elasticsearchService.saveProduct(dbData);  // 写到elasticsearch里面去
+                    });
+                    return dbData;
+                } finally {
+                    lock.unlock();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,8 +232,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     /**
      * 添加句子
      *
-     * @param addSentenceDTO
-     * 注意提交是一个事务 如果失败则回滚 我们这边使用的是spring的事务框架
+     * @param addSentenceDTO 注意提交是一个事务 如果失败则回滚 我们这边使用的是spring的事务框架
      */
     @Override
     @Transactional(rollbackFor = Exception.class, timeout = 10) // todo 如果插入标签过多 可能会导致事务回滚
@@ -245,8 +247,8 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
         addSentenceTagReq.setSentenceId(sentenceId);
         addSentenceTagReq.setTagsList(tagsList);
         int size = tagsList.size();
-        if(size==0)return;
-        else{
+        if (size == 0) return;
+        else {
             int i = tSentencesMapper.batchInsertTags(addSentenceTagReq); // 数据库插入标签并返回改变的标签数量
             if (i != size) {
                 throw new Exception("传入了无效标签");
@@ -260,6 +262,8 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
                         DATA_VERSION.incrementAndGet(); // 版本号自增
                         String cacheKey = "balloonSentences:all" + DATA_VERSION;
                         delayDoubleDelete(cacheKey, 5, TimeUnit.SECONDS); // 执行延时双删
+                        List<GetAllContentResp> dbData = tSentencesMapper.getAll(); // 更新elasticsearch
+                        elasticsearchService.saveProduct(dbData);  // 写到elasticsearch里面去
                     }
                 }
         );
@@ -269,6 +273,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
      * 更新缓存中全部句子的数据策略：延迟双删
      * 策略 先删除缓存 然后更新数据库 然后休眠 再删除缓存
      * 要求用分布式锁方式多线程进入操作数据库环境
+     *
      * @param cacheKey
      * @param delay
      * @param unit
@@ -293,6 +298,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     /**
      * 强制刷新缓存
+     *
      * @param currentVersion
      */
     private void refreshCacheWithVersion(AtomicInteger currentVersion) {
@@ -326,6 +332,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     /**
      * 删除句子
+     *
      * @param deleteSentenceReq
      */
     @Override
@@ -339,31 +346,32 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
 
     /**
      * 查询句子数据
+     *
      * @param queryWordsResp
      * @return
      */
     @Override
     public List<GetAllContentResp> queryWords(QueryWordsResp queryWordsResp) {
         // 根据传入的参数是匹配不同的查询类型
-        if(StrUtil.isBlank(queryWordsResp.getContent())&&StrUtil.isBlank(queryWordsResp.getFrom())){
+        if (StrUtil.isBlank(queryWordsResp.getContent()) && StrUtil.isBlank(queryWordsResp.getFrom())) {
             // 传了两个空值进来 走缓存->走数据库
             return tSentencesMapper.getAll();
-        }else if(StrUtil.isBlank(queryWordsResp.getFrom())){
+        } else if (StrUtil.isBlank(queryWordsResp.getFrom())) {
             // 只传了content 走elasticsearch 模糊查询
             String content = queryWordsResp.getContent();
-            List<GetAllContentResp> results = elasticsearchService.fuzzySearchByField("content",content,0, 10);
+            List<GetAllContentResp> results = elasticsearchService.fuzzySearchByField("content", content, 0, 10);
             return results;
-        }else if(StrUtil.isBlank(queryWordsResp.getContent())){
+        } else if (StrUtil.isBlank(queryWordsResp.getContent())) {
             // 只穿了from 走elasticsearch 模糊查询
             String from = queryWordsResp.getFrom();
             // 注意英文名称难以分词 就会出现不能模糊查询的缺点
-            List<GetAllContentResp> results = elasticsearchService.fuzzySearchByField("from",from,0, 10);
+            List<GetAllContentResp> results = elasticsearchService.fuzzySearchByField("from", from, 0, 10);
             return results;
-        }else{
+        } else {
             // 两个字段都有数值 走elasticsearch
             List<GetAllContentResp> results = elasticsearchService.fuzzySearchByTwoFields(
                     "content", queryWordsResp.getContent(),
-                    "from",queryWordsResp.getFrom(),
+                    "from", queryWordsResp.getFrom(),
                     0, 10);
             return results;
         }
