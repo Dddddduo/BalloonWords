@@ -7,12 +7,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.request.DeleteSentenceReq;
-import work.dduo.ans.model.vo.response.GetAllResp;
+import work.dduo.ans.model.vo.response.GetAllContentResp;
 import work.dduo.ans.model.vo.response.GetAllTagsResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
+import work.dduo.ans.model.vo.response.QueryWordsResp;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
 * @author ZDY
@@ -24,11 +24,11 @@ public interface TSentencesService extends IService<TSentences> {
     //    GetRespVO get();
     void get() throws JsonProcessingException;
 
-    List<GetAllResp> getAll();
+    List<GetAllContentResp> getAll();
 
     List<GetAllTagsResp> getAllTags();
 
-    List<GetAllResp> getAllByTags( @Param("tagsList") List<AddTagsReq> tagsList);
+    List<GetAllContentResp> getAllByTags(@Param("tagsList") List<AddTagsReq> tagsList);
 
     GetRespVO getByTags( @Param("tagsList")  List<AddTagsReq> tagsList);
 
@@ -37,4 +37,6 @@ public interface TSentencesService extends IService<TSentences> {
     void getAllUpdateCache();
 
     void deleteSentence(DeleteSentenceReq deleteSentenceReq);
+
+    List<GetAllContentResp> queryWords(QueryWordsResp queryWordsResp);
 }

@@ -12,8 +12,9 @@ import work.dduo.ans.model.Result;
 import work.dduo.ans.model.dto.AddSentenceDTO;
 import work.dduo.ans.model.vo.request.AddTagsReq;
 import work.dduo.ans.model.vo.request.DeleteSentenceReq;
-import work.dduo.ans.model.vo.response.GetAllResp;
+import work.dduo.ans.model.vo.response.GetAllContentResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
+import work.dduo.ans.model.vo.response.QueryWordsResp;
 import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.middleware.impl.RabbitmqServiceImpl;
 
@@ -35,16 +36,12 @@ public class WordsController {
     private GetRespVO getRespVO;
 
     /**
-     * 获取所有标签
      *
+     * 获取所有数据 展示在页面上用 配合Elasticsearch搜索使用
+     * 要求获取所有句子和所有的标签的组合
      * @return
+     * todo 没时间写了 为什么要留一个这样的bug..。 我实在是想不通 -2024/3/20
      */
-    @ApiOperation(value = "获取所有标签")
-    @PostMapping("/get-tags")
-    @VisitLogger(value = "获取所有标签")
-    public Result<?> getTags() {
-        return Result.success(tSentencesService.getAllTags());
-    }
 
     /**
      * 获取所有句子
@@ -52,11 +49,23 @@ public class WordsController {
      * @return
      */
     @ApiOperation(value = "获取所有句子")
-    @PostMapping("/get-all-words")
+    @GetMapping("/get-all-words")
     @VisitLogger(value = "获取所有句子")
     public Result<?> getAllWords() {
         // todo 解耦 将mysql数据库查询到的数据走redis缓存
         return Result.success(tSentencesService.getAll());
+    }
+
+    /**
+     * 获取所有标签
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取所有标签")
+    @GetMapping("/get-tags")
+    @VisitLogger(value = "获取所有标签")
+    public Result<?> getTags() {
+        return Result.success(tSentencesService.getAllTags());
     }
 
     /**
@@ -109,10 +118,10 @@ public class WordsController {
      * @return
      */
     @ApiOperation(value = "根据标签获取句子")
-    @PostMapping("/get-all-by-tags")
+    @GetMapping("/get-all-by-tags")
     @VisitLogger(value = "根据标签获取所有句子")
     public Result<?> getAllByTags(@Param("tagsList") @RequestBody List<AddTagsReq> tagsList) {
-        List<GetAllResp> allByTags = tSentencesService.getAllByTags(tagsList);
+        List<GetAllContentResp> allByTags = tSentencesService.getAllByTags(tagsList);
         return Result.success(allByTags);
     }
 
@@ -122,7 +131,7 @@ public class WordsController {
      * @return
      */
     @ApiOperation(value = "根据标签随机获取一条句子")
-    @PostMapping("/get-by-tags")
+    @GetMapping("/get-by-tags")
     @VisitLogger(value = "根据标签随机获取一条句子")
     public Result<?> getByTags(@Param("tagsList") @RequestBody List<AddTagsReq> tagsList) {
         GetRespVO getRespVO = tSentencesService.getByTags(tagsList);
@@ -168,17 +177,17 @@ public class WordsController {
     }
 
     /**
-     * 搜索句子
+     * 各种查询
      * @return boolean
-     * todo
      */
-    @ApiOperation(value = "添加一条句子")
+    @ApiOperation(value = "句子查询")
     @PostMapping("/search")
-    @VisitLogger(value = "添加一条句子")
-    public Result<?> search() throws Exception {
-        return Result.success();
+    @VisitLogger(value = "句子查询")
+    public Result<?> search(QueryWordsResp queryWordsResp) throws Exception {
+        // 按照传过来的参数来判断如何进行查询逻辑 传入content 和name
+        // 传入的是四种情况 两个空值 一个有值 两个有值
+        List<GetAllContentResp> queryResults=tSentencesService.queryWords(queryWordsResp);
+        return Result.success(queryResults);
     }
-
-
 
 }

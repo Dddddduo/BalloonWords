@@ -12,12 +12,19 @@ import java.util.Date;
 public class GetAllTagsResp {
 
     private Integer id;
+
     private String name;
+
     private String from;
+
     private String hot;
+
     private String other1;
+
     private String other2;
+
     private String other3;
+
     private Date createTime;
 
 }
