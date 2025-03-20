@@ -3,9 +3,7 @@ package work.dduo.ans.redis;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
-import work.dduo.ans.service.middleware.RedisService;
+import work.dduo.ans.middleware.impl.RedisServiceImpl;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RedisServiceTest {
 
     @Autowired
-    private RedisService redisService;
+    private RedisServiceImpl redisService;
 
     @Test
     public void testRedisConnection() {

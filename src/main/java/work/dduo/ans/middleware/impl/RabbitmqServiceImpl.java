@@ -1,9 +1,8 @@
-package work.dduo.ans.service.middleware;
+package work.dduo.ans.middleware.impl;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.GetResponse;
-import com.rabbitmq.client.MessageProperties;
 import org.springframework.amqp.core.Message;
 
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -15,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 
 @Service
-public class RabbitMqService {
+public class RabbitmqServiceImpl {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;

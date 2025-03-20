@@ -15,7 +15,7 @@ import work.dduo.ans.model.vo.request.DeleteSentenceReq;
 import work.dduo.ans.model.vo.response.GetAllResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
-import work.dduo.ans.service.middleware.RabbitMqService;
+import work.dduo.ans.middleware.impl.RabbitmqServiceImpl;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -28,7 +28,7 @@ public class WordsController {
     private TSentencesService tSentencesService;
 
     @Autowired
-    private RabbitMqService rabbitMqService;
+    private RabbitmqServiceImpl rabbitMqService;
 
     private final CountDownLatch latch = new CountDownLatch(1);
 
