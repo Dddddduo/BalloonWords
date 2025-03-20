@@ -51,7 +51,7 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     private static final AtomicInteger DATA_VERSION = new AtomicInteger(1);
 
     @Autowired
-    TSentencesMapper tSentencesMapper;
+    private TSentencesMapper tSentencesMapper;
 
     @Autowired
     private RabbitmqServiceImpl rabbitMqService;

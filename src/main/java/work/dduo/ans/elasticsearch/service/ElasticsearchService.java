@@ -32,12 +32,14 @@ public class ElasticsearchService {
      * @param getAllResp
      * @return
      */
-    public GetAllResp saveProduct(GetAllResp getAllResp) {
-        return getAllRespRepository.save(getAllResp);
+    public List<GetAllResp> saveProduct( List<GetAllResp> getAllResp) {
+//        这只是写单个数据
+//        return (List<GetAllResp>) getAllRespRepository.save(getAllResp);
+        return (List<GetAllResp>) getAllRespRepository.saveAll(getAllResp);
     }
 
     /**
-     * 单字符串全文查询，支持分页和排序
+     * 单字符串全文查询，支持分页和排序 查询包括字符串的所有数据 所有字段
      * @param queryString 查询字符串
      * @param page 页码
      * @param size 每页数量
@@ -50,7 +52,7 @@ public class ElasticsearchService {
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)
                 .withPageable(PageRequest.of(page,  size))
-                .withSort(SortBuilders.fieldSort("weight").order(SortOrder.DESC))
+                .withSort(SortBuilders.fieldSort("id").order(SortOrder.ASC)) // 按照id排序 正序
                 .build();
         // 执行查询
         SearchHits<GetAllResp> searchHits = elasticsearchTemplate.search(searchQuery,  GetAllResp.class);
@@ -61,7 +63,7 @@ public class ElasticsearchService {
     }
 
     /**
-     * 某字段按字符串模糊查询
+     * 某字段按字符串模糊查询 只查询指定字段
      * @param field 字段名
      * @param value 查询值
      * @param page 页码

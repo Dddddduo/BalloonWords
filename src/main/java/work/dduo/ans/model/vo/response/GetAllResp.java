@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Document(indexName = "sentences")
 public class GetAllResp {
+
     @Id
     private Integer id;
 
