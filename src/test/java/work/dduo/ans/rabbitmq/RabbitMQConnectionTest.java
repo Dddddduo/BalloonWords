@@ -1,11 +1,9 @@
 package work.dduo.ans.rabbitmq;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import work.dduo.ans.service.middleware.RabbitMqService;
+import work.dduo.ans.middleware.impl.RabbitmqServiceImpl;
 
 import java.util.Date;
 
@@ -19,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RabbitMQConnectionTest {
 
     @Autowired
-    private RabbitMqService rabbitMqService;
+    private RabbitmqServiceImpl rabbitMqService;
 
     @Test
     // 测试消息队列的连接

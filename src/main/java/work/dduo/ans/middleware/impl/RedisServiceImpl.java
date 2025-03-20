@@ -1,11 +1,10 @@
-package work.dduo.ans.service.middleware;
+package work.dduo.ans.middleware.impl;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import work.dduo.ans.model.vo.response.GetAllResp;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @SuppressWarnings("all")
-public class RedisService {
+public class RedisServiceImpl {
 
     // 注入 RedisTemplate
     @Resource

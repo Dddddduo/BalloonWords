@@ -92,5 +92,3 @@ thread:
     max-pool-size: 10
     queue-capacity: 50
     keep-alive-seconds: 60
-
-

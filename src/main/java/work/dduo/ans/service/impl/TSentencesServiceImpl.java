@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Param;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -26,8 +25,8 @@ import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.mapper.TSentencesMapper;
 import org.springframework.stereotype.Service;
-import work.dduo.ans.service.middleware.RabbitMqService;
-import work.dduo.ans.service.middleware.RedisService;
+import work.dduo.ans.middleware.impl.RabbitmqServiceImpl;
+import work.dduo.ans.middleware.impl.RedisServiceImpl;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -55,10 +54,10 @@ public class TSentencesServiceImpl extends ServiceImpl<TSentencesMapper, TSenten
     TSentencesMapper tSentencesMapper;
 
     @Autowired
-    private RabbitMqService rabbitMqService;
+    private RabbitmqServiceImpl rabbitMqService;
 
     @Autowired
-    private RedisService redisService;
+    private RedisServiceImpl redisService;
 
     @Autowired
     private RedissonClient redissonClient;
