@@ -16,17 +16,20 @@ public class CacheUpdateTask {
     @Autowired
     private TSentencesService tSentencesService;
 
-    private  AtomicInteger num = new AtomicInteger(1);
+    private  AtomicInteger CacheNum = new AtomicInteger(1);
+
+    private  AtomicInteger ElasticSearchNum = new AtomicInteger(1);
 
     @Scheduled(fixedRate = 5 * 60 * 1000) // 每五分钟执行一次
 //    @Scheduled(fixedRate = 1000) // 每一秒执行一次
     public void updateCacheTask() {
-        System.out.println("第"+num+"次更新缓存");
+        System.out.println("the "+CacheNum+" time update cache");
         try {
             tSentencesService.getAllUpdateCache();
-            num.incrementAndGet();
+            CacheNum.incrementAndGet();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 } 

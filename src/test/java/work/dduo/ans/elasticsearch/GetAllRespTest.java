@@ -18,7 +18,7 @@ public class GetAllRespTest {
     @Autowired
     private ElasticsearchService elasticsearchService;
 
-    // 往es里面写入数据
+    // 往es里更新数据
     @Test
     public void testElasticSearch(){
         // 获取数据
