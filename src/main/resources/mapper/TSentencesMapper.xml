@@ -86,7 +86,7 @@
             LIMIT 1; -- 只取一条数据
     </select>
 
-    <select id="getAll" resultType="work.dduo.ans.model.vo.response.GetAllResp">
+    <select id="getAll" resultType="work.dduo.ans.model.vo.response.GetAllContentResp">
         SELECT *
         FROM t_sentences;
     </select>
@@ -95,7 +95,7 @@
         FROM t_tags;
     </select>
 
-    <select id="getAllByTags" resultType="work.dduo.ans.model.vo.response.GetAllResp">
+    <select id="getAllByTags" resultType="work.dduo.ans.model.vo.response.GetAllContentResp">
         SELECT
         TS.id,
         TS.content,

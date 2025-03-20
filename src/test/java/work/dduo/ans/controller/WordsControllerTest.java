@@ -12,14 +12,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import work.dduo.ans.mapper.TSentencesMapper;
 import work.dduo.ans.model.Result;
 import work.dduo.ans.model.vo.request.AddTagsReq;
-import work.dduo.ans.model.vo.response.GetAllResp;
+import work.dduo.ans.model.vo.response.GetAllContentResp;
 import work.dduo.ans.model.vo.response.GetResp;
 import work.dduo.ans.model.vo.response.GetRespVO;
 import work.dduo.ans.service.TSentencesService;
 import work.dduo.ans.service.impl.TSentencesServiceImpl;
 
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -149,13 +148,13 @@ public class WordsControllerTest {
     public void testGetAllByTags() throws Exception {
         // 准备mock数据
         List<AddTagsReq> tagsList = Collections.singletonList(new AddTagsReq());
-        List<GetAllResp> expectedList = Arrays.asList(new GetAllResp(), new GetAllResp());
+        List<GetAllContentResp> expectedList = Arrays.asList(new GetAllContentResp(), new GetAllContentResp());
 
         // Mock Mapper行为
         when(tSentencesMapper.getAllByTags(tagsList)).thenReturn(expectedList);
 
         // 调用测试方法
-        List<GetAllResp> result = tSentencesServiceImpl.getAllByTags(tagsList);
+        List<GetAllContentResp> result = tSentencesServiceImpl.getAllByTags(tagsList);
 
         // 验证
         assertEquals(expectedList, result);
