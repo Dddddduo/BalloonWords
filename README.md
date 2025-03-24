@@ -35,8 +35,8 @@ BallonWords 是一个轻量级中文语句灵感平台，致力于为文字注�
   - [x] 引入redis缓存降低数据库查询的压力，采用延迟双删+乐观锁
   - [x] 引入Elasticsearch完善搜索引擎，定制化搜索
   - [x] Docker Compose一键部署
+  - [ ] Github自动化配置，开源项目敏感信息脱敏
   - [ ] 使用cannel实时检测mysql
-  - [ ] github自动化配置，开源项目敏感信息脱敏
   - [ ] 完成前端管理界面(vue) 并且使用satoken完成鉴权处理
   - [ ] 使用jmeter进行压力测试，并完成报告
 
