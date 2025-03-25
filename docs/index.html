@@ -1184,27 +1184,27 @@
             <p>事务管理</p>
         </div>
         <div class="tech-item">
-            <h4>配置Elasticsearch</h4>
+            <h4>Elasticsearch</h4>
             <p>搜索引擎</p>
+        </div>
+        <div class="tech-item">
+            <h4>Github Action</h4>
+            <p>CI/CD 持续集成，持续交付</p>
+        </div>
+        <div class="tech-item">
+            <h4>Docker Compose</h4>
+            <p>容器化思想 一键部署</p>
+        </div>
+        <div class="tech-item">
+            <h4>jmeter</h4>
+            <p>压力测试</p>
         </div>
     </div>
 
     <div id="progress" class="progress-section">
         <h2>✅ 后期展望</h2>
         <div class="progress-item">
-            <span>引入Elasticsearch</span>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 10%"></div>
-            </div>
-        </div>
-        <div class="progress-item">
-            <span>使用cannel实时检测mysql</span>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 10%"></div>
-            </div>
-        </div>
-        <div class="progress-item">
-            <span>github自动化部署</span>
+            <span>docker使用cannel实时检测mysql</span>
             <div class="progress-bar">
                 <div class="progress-fill" style="width: 10%"></div>
             </div>
@@ -1237,6 +1237,26 @@
             <div class="update-date">2024-03-10 ~ 2024-03-13</div>
             <p>使用spring事务控制增添操作的原子性</p>
             <p>Transactional注解控制超时管理 事务回滚</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-15 ~ 2024-03-17</div>
+            <p>Elasticsearch完善搜索引擎</p>
+            <p>降低搜索压力</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-20 ~ 2024-03-21</div>
+            <p>Docker Compose一键部署</p>
+            <p>容器 IDEA集成docker</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-22 ~ 2024-03-25</div>
+            <p>Github自动化Workflows配置</p>
+            <p>maven项目跑CI/CD流程，代码覆盖率检查</p>
+        </div>
+        <div class="update-item">
+            <div class="update-date">2024-03-26 ~ 2024-03-27</div>
+            <p>jmeter</p>
+            <p>对每个接口进行压力测试，并完成报告</p>
         </div>
     </div>
 
@@ -1400,28 +1420,61 @@
             <div class="highlight-item">
                 <h3>🧪 完善的测试覆盖</h3>
                 <ul>
-                    <li>使用 JUnit 5 进行单元测试</li>
-                    <li>MockMvc 模拟 HTTP 请求</li>
-                    <li>Mockito 实现依赖注入模拟</li>
-                    <li>测试覆盖率 > 80%</li>
+                    <li>使用 JUnit 5 进行单元测试，确保业务逻辑正确性</li>
+                    <li>MockMvc 模拟 HTTP 请求，验证接口行为</li>
+                    <li>Mockito 实现依赖注入模拟，隔离测试环境</li>
+                    <li>测试覆盖率 > 80%，保障代码质量</li>
+                    <li>使用 JaCoCo 生成测试覆盖率报告，实现可视化监控</li>
                 </ul>
             </div>
             <div class="highlight-item">
                 <h3>📦 模块化设计</h3>
                 <ul>
-                    <li>清晰的分层架构</li>
-                    <li>统一的异常处理</li>
-                    <li>规范的接口文档</li>
-                    <li>可扩展的标签系统</li>
+                    <li>采用清晰的分层架构，实现关注点分离</li>
+                    <li>全局统一的异常处理机制，提升用户体验</li>
+                    <li>规范的接口文档，便于协作开发</li>
+                    <li>可扩展的标签系统，支持灵活的内容管理</li>
+                    <li>采用依赖注入设计模式，降低模块间耦合度</li>
                 </ul>
             </div>
             <div class="highlight-item">
                 <h3>🛠️ 开发规范</h3>
                 <ul>
-                    <li>遵循 Angular 提交规范</li>
-                    <li>代码风格检查</li>
-                    <li>持续集成/部署</li>
-                    <li>自动化测试流程</li>
+                    <li>严格遵循 Angular 提交规范，保持提交历史清晰</li>
+                    <li>集成 Checkstyle 代码风格检查，确保代码一致性</li>
+                    <li>完善的 CI/CD 流程，实现自动化部署</li>
+                    <li>自动化测试流程，降低回归测试成本</li>
+                    <li>代码审查机制，保障代码质量</li>
+                </ul>
+            </div>
+            <div class="highlight-item">
+                <h3>🚀 性能优化</h3>
+                <ul>
+                    <li>Redis 缓存机制减轻数据库压力，提升响应速度</li>
+                    <li>分布式锁防止缓存穿透，增强系统稳定性</li>
+                    <li>基于 Elasticsearch 的高效搜索引擎，优化查询性能</li>
+                    <li>RabbitMQ 消息队列实现异步处理，提高系统吞吐量</li>
+                    <li>JMeter 性能测试，确保系统在高负载下稳定运行</li>
+                </ul>
+            </div>
+            <div class="highlight-item">
+                <h3>🐳 容器化部署</h3>
+                <ul>
+                    <li>Docker Compose 实现一键部署，简化运维流程</li>
+                    <li>容器化微服务架构，提高系统可扩展性</li>
+                    <li>IDEA 集成 Docker，优化开发体验</li>
+                    <li>环境一致性保障，避免"我这里能跑"问题</li>
+                    <li>资源隔离与限制，提高系统安全性</li>
+                </ul>
+            </div>
+            <div class="highlight-item">
+                <h3>🔒 安全与事务</h3>
+                <ul>
+                    <li>Spring 事务管理确保数据一致性</li>
+                    <li>事务超时控制与回滚机制，防止资源长时间占用</li>
+                    <li>API 接口权限控制，保障系统安全</li>
+                    <li>请求参数验证，防止恶意输入</li>
+                    <li>敏感数据加密存储，保护用户隐私</li>
                 </ul>
             </div>
         </div>
